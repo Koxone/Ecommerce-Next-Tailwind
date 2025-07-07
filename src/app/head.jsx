@@ -20,7 +20,6 @@ export default function Head() {
         name="viewport"
         content="width=device-width, initial-scale=1, viewport-fit=cover"
       />
-
       <meta name="theme-color" content="#101828" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta

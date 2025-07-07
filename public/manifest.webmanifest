@@ -1,22 +1,19 @@
 {
   "name": "FWSHOP",
   "short_name": "FWSHOP",
-  "description": "Tienda de ropa deportiva con envíos el mismo día en CDMX.",
-  "display": "standalone",
   "start_url": "/?standalone=true",
-  "background_color": "#101828",
+  "display": "standalone",
   "theme_color": "#101828",
-  "lang": "es",
-  "scope": "/",
+  "background_color": "#101828",
   "icons": [
     {
       "src": "/apple-touch-icon.png",
-      "sizes": "192x192",
+      "sizes": "180x180",
       "type": "image/png"
     },
     {
-      "src": "/apple-touch-icon.png",
-      "sizes": "512x512",
+      "src": "/favicon-96x96.png",
+      "sizes": "96x96",
       "type": "image/png"
     }
   ]

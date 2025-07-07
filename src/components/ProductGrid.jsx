@@ -5,7 +5,7 @@ import ProductCard from './cards/ProductCard';
 import { FilterIcon, GridIcon, ListIcon } from './Icons';
 
 const ProductGrid = ({
-  title = 'SHOP DROP 3',
+  title = 'SHOP DROP 1',
   products = [],
   showTabs = true,
   showFilters = true,

@@ -51,7 +51,7 @@ export default function HomePage() {
 
       {/* ProductGrid - SHOP DROP 3 */}
       <ProductGrid
-        title="DROP 3"
+        title="DROP 1"
         showTabs={true}
         showFilters={false}
         className="animate-fade-in"

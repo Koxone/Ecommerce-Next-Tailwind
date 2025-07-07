@@ -15,6 +15,10 @@ export default function Head() {
         href="/apple-touch-icon.png"
       />
       <link rel="manifest" href="/site.webmanifest" />
+      <meta name="theme-color" content="#101828" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+      <meta name="mobile-web-app-capable" content="yes" />
     </>
   );
 }

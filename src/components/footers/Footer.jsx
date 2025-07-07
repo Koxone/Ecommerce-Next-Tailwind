@@ -138,7 +138,7 @@ const Footer = () => {
               <ul className="space-y-2">
                 {[
                   'About Us',
-                  'Alphaland',
+                  'FitWorld Shop',
                   'Careers',
                   'Press',
                   'Sustainability',
@@ -165,7 +165,7 @@ const Footer = () => {
           <div className="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
             {/* Copyright */}
             <div className="font-inter text-sm text-gray-400">
-              © {currentYear} Alphalete Athletics. All rights reserved.
+              © {currentYear} FitWorld Shop. All rights reserved.
             </div>
 
             {/* Legal Links */}

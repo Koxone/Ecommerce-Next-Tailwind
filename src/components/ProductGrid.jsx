@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useState } from 'react';
 import ProductCard from './cards/ProductCard';
@@ -131,106 +131,60 @@ const ProductGrid = ({
   });
 
   return (
-    <section className={`bg-gray-900 py-16 ${className}`}>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="animate-fade-in bg-gray-900 py-16">
+      <div className="mx-auto max-w-7xl px-4 flex flex-col gap-5 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="animate-fade-in mb-12 text-center">
-          <h2 className="font-montserrat mb-4 text-4xl font-bold tracking-wider text-white">
-            {title}
-          </h2>
-        </div>
+        <div className="flex flex-col items-start">
+          <div className="animate-fade-in text-left">
+            <h2 className="text-lg font-bold tracking-wider text-neutral-400">
+              SHOP
+            </h2>
+            <h2 className="mb-4 text-2xl font-bold tracking-wider text-white">
+              {title}
+            </h2>
+          </div>
 
-        {/* Tabs */}
-        {showTabs && (
-          <div className="animate-slide-in-left mb-8 flex justify-center">
-            <div className="inline-flex rounded-lg bg-gray-800 p-1">
-              <button
-                onClick={() => setActiveTab('women')}
-                className={`font-poppins rounded-md px-6 py-2 font-medium transition-all duration-200 ${
-                  activeTab === 'women'
-                    ? 'bg-white text-gray-900'
-                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                }`}
-              >
-                Women's
-              </button>
-              <button
-                onClick={() => setActiveTab('men')}
-                className={`font-poppins rounded-md px-6 py-2 font-medium transition-all duration-200 ${
-                  activeTab === 'men'
-                    ? 'bg-white text-gray-900'
-                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                }`}
-              >
-                Men's
-              </button>
+          {/* Tabs */}
+          {showTabs && (
+            <div className="animate-slide-in-left mb- flex justify-center">
+              <div className="inline-flex gap-4 rounded-lg bg-gray-800 p-1">
+                <button
+                  onClick={() => setActiveTab('women')}
+                  className={`font-poppins cursor-pointer rounded-md px-6 py-2 font-medium transition-all duration-200 ${
+                    activeTab === 'women'
+                      ? 'bg-white text-gray-900'
+                      : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                  }`}
+                >
+                  Mujeres
+                </button>
+                <button
+                  onClick={() => setActiveTab('men')}
+                  className={`font-poppins cursor-pointer rounded-md px-6 py-2 font-medium transition-all duration-200 ${
+                    activeTab === 'men'
+                      ? 'bg-white text-gray-900'
+                      : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                  }`}
+                >
+                  Hombres
+                </button>
+              </div>
             </div>
-          </div>
-        )}
-
-        {/* Filters and View Toggle */}
-        {(showFilters || showViewToggle) && (
-          <div className="animate-slide-in-right mb-8 flex flex-col items-center justify-between gap-4 sm:flex-row">
-            {/* Filters */}
-            {showFilters && (
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2">
-                  <FilterIcon size={16} className="text-gray-400" />
-                  <select
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)}
-                    className="font-inter rounded border border-gray-600 bg-gray-800 px-3 py-2 text-white transition-colors duration-200 focus:border-white focus:outline-none"
-                  >
-                    <option value="featured">Featured</option>
-                    <option value="newest">Newest</option>
-                    <option value="price-low">Price: Low to High</option>
-                    <option value="price-high">Price: High to Low</option>
-                    <option value="rating">Highest Rated</option>
-                  </select>
-                </div>
-              </div>
-            )}
-
-            {/* View Toggle */}
-            {showViewToggle && (
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => setViewMode('grid')}
-                  className={`focus-ring rounded p-2 transition-colors duration-200 ${
-                    viewMode === 'grid'
-                      ? 'bg-white text-gray-900'
-                      : 'text-gray-400 hover:text-white'
-                  }`}
-                >
-                  <GridIcon size={16} />
-                </button>
-                <button
-                  onClick={() => setViewMode('list')}
-                  className={`focus-ring rounded p-2 transition-colors duration-200 ${
-                    viewMode === 'list'
-                      ? 'bg-white text-gray-900'
-                      : 'text-gray-400 hover:text-white'
-                  }`}
-                >
-                  <ListIcon size={16} />
-                </button>
-              </div>
-            )}
-          </div>
-        )}
+          )}
+        </div>
 
         {/* Products Grid */}
         <div
-          className={`animate-fade-in grid gap-6 ${
+          className={`animate-fade-in gap-6 ${
             viewMode === 'grid'
-              ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
-              : 'grid-cols-1'
+              ? 'flex snap-x snap-mandatory overflow-x-auto sm:grid sm:grid-cols-2 xl:grid xl:grid-cols-4'
+              : 'grid grid-cols-1'
           }`}
         >
           {sortedProducts.map((product, index) => (
             <div
               key={product.id}
-              className="animate-scale-in"
+              className="animate-scale-in flex items-center justify-center"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <ProductCard

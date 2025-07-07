@@ -59,13 +59,13 @@ const Carousel = ({
         <>
           <button
             onClick={goToPrevious}
-            className="bg-opacity-50 hover:bg-opacity-75 hover-scale focus-ring absolute top-1/2 left-4 z-10 -translate-y-1/2 transform rounded-full bg-black p-2 text-white transition-all duration-200"
+            className="bg-opacity-50 hover:bg-opacity-75 cursor-pointer hover-scale focus-ring absolute top-1/2 left-4 z-10 -translate-y-1/2 transform rounded-full bg-black p-2 text-white transition-all duration-200"
           >
             <ChevronLeftIcon size={20} />
           </button>
           <button
             onClick={goToNext}
-            className="bg-opacity-50 hover:bg-opacity-75 hover-scale focus-ring absolute top-1/2 right-4 z-10 -translate-y-1/2 transform rounded-full bg-black p-2 text-white transition-all duration-200"
+            className="bg-opacity-50 hover:bg-opacity-75 cursor-pointer hover-scale focus-ring absolute top-1/2 right-4 z-10 -translate-y-1/2 transform rounded-full bg-black p-2 text-white transition-all duration-200"
           >
             <ChevronRightIcon size={20} />
           </button>
@@ -79,7 +79,7 @@ const Carousel = ({
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`focus-ring h-3 w-3 rounded-full transition-all duration-200 ${
+              className={`focus-ring cursor-pointer h-3 w-3 rounded-full transition-all duration-200 ${
                 index === currentIndex
                   ? 'bg-white'
                   : 'bg-opacity-50 hover:bg-opacity-75 bg-white'

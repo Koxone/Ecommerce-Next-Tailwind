@@ -44,10 +44,10 @@ export function MainContextProvider({ children }) {
           tienda!
         </p>
         <div className="flex flex-col justify-center gap-4 sm:flex-row">
-          <button className="hover-lift focus-ring font-poppins rounded-lg bg-white px-6 py-3 font-semibold text-gray-900 transition-all duration-200 hover:bg-gray-100 md:px-8 md:py-4">
+          <button className="hover-lift focus-ring font-poppins cursor-pointer rounded-lg bg-white px-6 py-3 font-semibold text-gray-900 transition-all duration-200 hover:bg-gray-100 md:px-8 md:py-4">
             MUJERES
           </button>
-          <button className="hover-lift focus-ring font-poppins rounded-lg border-2 border-white bg-transparent px-6 py-3 font-semibold text-white transition-all duration-200 hover:bg-white hover:text-gray-900 md:px-8 md:py-4">
+          <button className="hover-lift focus-ring font-poppins cursor-pointer rounded-lg border-2 border-white bg-transparent px-6 py-3 font-semibold text-white transition-all duration-200 hover:bg-white hover:text-gray-900 md:px-8 md:py-4">
             HOMBRES
           </button>
         </div>
@@ -67,7 +67,7 @@ export function MainContextProvider({ children }) {
           Desarrollado durante dos años. Tecnología realzadora de glúteos que
           marca un nuevo estándar.
         </p>
-        <button className="hover-lift focus-ring font-poppins rounded-lg bg-white px-6 py-3 font-semibold text-gray-900 transition-all duration-200 hover:bg-gray-100 md:px-8 md:py-4">
+        <button className="hover-lift focus-ring font-poppins cursor-pointer rounded-lg bg-white px-6 py-3 font-semibold text-gray-900 transition-all duration-200 hover:bg-gray-100 md:px-8 md:py-4">
           MUJERES
         </button>
       </div>
@@ -85,7 +85,7 @@ export function MainContextProvider({ children }) {
         <p className="font-inter mb-6 text-lg text-white md:text-xl lg:text-2xl">
           Esenciales básicos hechos para acompañarte en cada temporada.
         </p>
-        <button className="hover-lift focus-ring font-poppins rounded-lg bg-white px-6 py-3 font-semibold text-gray-900 transition-all duration-200 hover:bg-gray-100 md:px-8 md:py-4">
+        <button className="hover-lift focus-ring font-poppins cursor-pointer rounded-lg bg-white px-6 py-3 font-semibold text-gray-900 transition-all duration-200 hover:bg-gray-100 md:px-8 md:py-4">
           COMPRA AHORA
         </button>
       </div>
@@ -219,7 +219,7 @@ export function MainContextProvider({ children }) {
         <h2 className="font-montserrat mb-4 text-4xl font-bold tracking-wider text-white md:text-6xl lg:text-8xl">
           FOR HER
         </h2>
-        <button className="hover-lift focus-ring font-poppins rounded-lg bg-white px-6 py-3 font-semibold text-gray-900 transition-all duration-200 hover:bg-gray-100 md:px-8 md:py-4">
+        <button className="hover-lift focus-ring font-poppins cursor-pointer rounded-lg bg-white px-6 py-3 font-semibold text-gray-900 transition-all duration-200 hover:bg-gray-100 md:px-8 md:py-4">
           SHOP WOMEN
         </button>
       </div>
@@ -233,7 +233,7 @@ export function MainContextProvider({ children }) {
         <h2 className="font-montserrat mb-4 text-4xl font-bold tracking-wider text-white md:text-6xl lg:text-8xl">
           FOR HIM
         </h2>
-        <button className="hover-lift focus-ring font-poppins rounded-lg bg-white px-6 py-3 font-semibold text-gray-900 transition-all duration-200 hover:bg-gray-100 md:px-8 md:py-4">
+        <button className="hover-lift focus-ring font-poppins cursor-pointer rounded-lg bg-white px-6 py-3 font-semibold text-gray-900 transition-all duration-200 hover:bg-gray-100 md:px-8 md:py-4">
           SHOP MEN
         </button>
       </div>
@@ -247,7 +247,7 @@ export function MainContextProvider({ children }) {
         <h2 className="font-montserrat mb-4 text-4xl font-bold tracking-wider text-white md:text-6xl lg:text-8xl">
           ACCESSORIES
         </h2>
-        <button className="hover-lift focus-ring font-poppins rounded-lg bg-white px-6 py-3 font-semibold text-gray-900 transition-all duration-200 hover:bg-gray-100 md:px-8 md:py-4">
+        <button className="hover-lift focus-ring font-poppins cursor-pointer rounded-lg bg-white px-6 py-3 font-semibold text-gray-900 transition-all duration-200 hover:bg-gray-100 md:px-8 md:py-4">
           SHOP ACCESSORIES
         </button>
       </div>

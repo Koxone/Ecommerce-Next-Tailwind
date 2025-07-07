@@ -1,4 +1,5 @@
 'use client';
+import { useEffect, useState } from 'react';
 import { Montserrat, Inter } from 'next/font/google';
 import '@/app/globals.css';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -19,10 +20,16 @@ const inter = Inter({
 });
 
 export default function RootLayout({ children }) {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
   return (
     <MainContextProvider>
       <html lang="es" className={`${montserrat.variable} ${inter.variable}`}>
-        <body>
+        <body className={isLoaded ? 'animate-slide-up' : ''}>
           <I18nProvider>
             <PageTransitionWrapper>{children}</PageTransitionWrapper>
           </I18nProvider>

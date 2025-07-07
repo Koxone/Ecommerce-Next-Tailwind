@@ -5,7 +5,7 @@ import Carousel from './components/carousels/Carousel';
 import Footer from './components/footers/Footer';
 import Cart from './components/cart/Cart';
 import UserProfile from './app/user-profile/UserProfile';
-import ProductsView from './app/product-view/ProductsView';
+import ProductsView from './app/product-view/page';
 // import ProductDetail from "./pages/ProductDetail";
 import './App.css';
 

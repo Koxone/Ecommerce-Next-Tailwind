@@ -10,7 +10,6 @@ import { useMainContext } from '../../context/MainContext';
 
 function ProductDetail() {
   const {
-    // relatedProducts,
     product,
     carouselItems,
     selectedSize,
@@ -18,7 +17,6 @@ function ProductDetail() {
     selectedColor,
     setSelectedColor,
     quantity,
-    // setQuantity,
     activeTab,
     setActiveTab,
     isWishlisted,

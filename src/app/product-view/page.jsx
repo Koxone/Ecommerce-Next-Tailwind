@@ -1,6 +1,9 @@
+'use client';
+
 import { useState } from 'react';
 import { FilterIcon, GridIcon, ListIcon } from '../../components/Icons';
 import ProductCard from '../../components/cards/ProductCard';
+import productsData from '@/data/products/productsData';
 
 const ProductsView = () => {
   const [viewMode, setViewMode] = useState('grid');
@@ -8,80 +11,7 @@ const ProductsView = () => {
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [sortBy, setSortBy] = useState('featured');
 
-  const allProducts = [
-    {
-      id: 1,
-      name: 'Sandy Bra',
-      description: "Women's Seamless Scrunch Bra",
-      price: 48,
-      image: '/promo1.jpg',
-      category: 'women',
-      rating: 4.8,
-    },
-    {
-      id: 2,
-      name: 'Pump Short',
-      description: "Women's Seamless Short",
-      price: 50,
-      image: '/promo1.jpg',
-      category: 'women',
-      rating: 4.6,
-    },
-    {
-      id: 3,
-      name: 'Push Tank',
-      description: "Women's 2 in 1 Seamless Tank",
-      price: 46,
-      image: '/promo1.jpg',
-      category: 'women',
-      rating: 4.7,
-    },
-    {
-      id: 4,
-      name: 'Pump Legging',
-      description: "Women's Seamless Legging",
-      price: 70,
-      image: '/promo1.jpg',
-      category: 'women',
-      rating: 4.9,
-    },
-    {
-      id: 5,
-      name: 'Alpha Tank',
-      description: "Men's Performance Tank",
-      price: 42,
-      image: '/promo1.jpg',
-      category: 'men',
-      rating: 4.5,
-    },
-    {
-      id: 6,
-      name: 'Elite Shorts',
-      description: "Men's Training Shorts",
-      price: 55,
-      image: '/promo1.jpg',
-      category: 'men',
-      rating: 4.4,
-    },
-    {
-      id: 7,
-      name: 'Power Hoodie',
-      description: "Men's Performance Hoodie",
-      price: 85,
-      image: '/promo1.jpg',
-      category: 'men',
-      rating: 4.8,
-    },
-    {
-      id: 8,
-      name: 'Flex Joggers',
-      description: "Men's Training Joggers",
-      price: 65,
-      image: '/promo1.jpg',
-      category: 'men',
-      rating: 4.6,
-    },
-  ];
+  const allProducts = productsData;
 
   const filteredProducts = allProducts.filter((product) => {
     if (categoryFilter === 'all') return true;

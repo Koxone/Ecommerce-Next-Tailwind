@@ -25,7 +25,7 @@ export function MainContextProvider({ children }) {
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedColor, setSelectedColor] = useState(0);
   const [quantity, setQuantity] = useState(1);
-  const [activeTab, setActiveTab] = useState('description');
+  const [activeTab, setActiveTab] = useState('women');
   const [isWishlisted, setIsWishlisted] = useState(false);
 
   const heroItems = [

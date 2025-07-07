@@ -1,15 +1,45 @@
+'use client';
+
 import { useState } from 'react';
 import { HeartIcon, StarIcon } from '../Icons';
+import { useMainContext } from '@/context/MainContext';
 
 const ProductCard = ({
-  product,
   showQuickView = true,
   showWishlist = true,
   showRating = true,
   className = '',
 }) => {
-  const [isWishlisted, setIsWishlisted] = useState(false);
   const [selectedColorIndex, setSelectedColorIndex] = useState(0);
+
+  const {
+    activeTab,
+    heroItems,
+    isRevealed,
+    promoSections,
+    categoryItems,
+    setIsRevealed,
+    carouselItems,
+    currentPage,
+    handleQuantityChange,
+    headerButtons,
+    isCartOpen,
+    isMenuOpen,
+    isWishlisted,
+    product,
+    quantity,
+    relatedProducts,
+    selectedColor,
+    selectedSize,
+    setActiveTab,
+    setCurrentPage,
+    setIsCartOpen,
+    setIsMenuOpen,
+    setIsWishlisted,
+    setQuantity,
+    setSelectedColor,
+    setSelectedSize,
+  } = useMainContext();
 
   const handleWishlistToggle = () => {
     setIsWishlisted(!isWishlisted);
@@ -49,7 +79,7 @@ const ProductCard = ({
         {showWishlist && (
           <button
             onClick={handleWishlistToggle}
-            className="bg-opacity-50 hover:bg-opacity-75 hover-scale focus-ring absolute top-3 right-3 rounded-full bg-black p-2 opacity-0 transition-all duration-200 group-hover:opacity-100"
+            className="bg-opacity-50 hover:bg-opacity-75 focus-ring absolute top-3 right-3 cursor-pointer rounded-full bg-black p-2 opacity-0 transition-all duration-200 ease-in-out group-hover:opacity-100 hover:scale-125"
           >
             <HeartIcon
               size={16}
@@ -62,7 +92,7 @@ const ProductCard = ({
         {/* Quick View Button */}
         {showQuickView && (
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-            <button className="focus-ring w-full rounded bg-white px-4 py-2 font-semibold text-gray-900 transition-colors duration-200 hover:bg-gray-100">
+            <button className="focus-ring w-full cursor-pointer rounded bg-white px-4 py-2 font-semibold text-gray-900 transition-colors duration-200 hover:bg-gray-300">
               Quick View
             </button>
           </div>

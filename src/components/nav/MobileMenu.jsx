@@ -21,11 +21,8 @@ const MobileMenu = () => {
       >
         {/* Menu Header */}
         <div className="flex items-center justify-between border-b border-gray-700 p-4">
-          <button className="flex max-w-[120px] cursor-pointer items-center md:h-[37px] md:w-[154px]">
-            <p className="flex items-center text-[30px] font-extrabold md:text-5xl">
-              <span className="bg-red-500 px-1 text-gray-900">FWS</span>
-              <span className="-ml-1.5 font-bold text-white">HOP</span>
-            </p>
+          <button className="flex max-w-[120px] cursor-pointer items-center md:h-[37px] md:max-w-[160px]">
+            <img src="/logo.png" alt="" />
           </button>
           <button
             onClick={closeMenu}

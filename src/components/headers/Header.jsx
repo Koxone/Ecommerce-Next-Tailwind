@@ -50,11 +50,12 @@ const Header = () => {
       <header className="sticky top-0 z-50 border-b border-gray-700 bg-gray-900">
         <div className="grid h-16 w-full grid-cols-[auto_1fr_auto] items-center justify-between pl-5">
           {/* Logo */}
-          <button className="flex max-w-[120px] cursor-pointer items-center md:h-[37px] md:w-[154px]">
-            <p className="flex items-center text-[30px] font-extrabold md:text-5xl">
+          <button className="flex max-w-[120px] cursor-pointer items-center md:h-[37px] md:max-w-[160px]">
+            {/* <p className="flex items-center text-[30px] font-extrabold md:text-5xl">
               <span className="bg-red-500 px-1 text-gray-900">FWS</span>
               <span className="-ml-1.5 font-bold text-white">HOP</span>
-            </p>
+            </p> */}
+            <img src="/logo.png" alt="" />
           </button>
 
           {/* Desktop Navigation Buttons */}

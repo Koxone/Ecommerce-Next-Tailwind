@@ -40,14 +40,9 @@ const Footer = () => {
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             {/* Company Info */}
             <div className="space-y-4">
-              <p className="flex items-center font-extrabold md:text-5xl">
-                <span className="bg-red-500 px-1 text-[37px] text-gray-900">
-                  FWS
-                </span>
-                <span className="-ml-1.5 text-[30px] font-bold text-white">
-                  HOP
-                </span>
-              </p>
+              <button className="flex max-w-[120px] cursor-pointer items-center md:h-[37px] md:max-w-[160px]">
+                <img src="/logo.png" alt="" />
+              </button>
               <p className="font-inter text-sm text-gray-400">
                 Ropa deportiva premium diseñada para quienes exigen excelencia
                 en cada aspecto de su viaje fitness.

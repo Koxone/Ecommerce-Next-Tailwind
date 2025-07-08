@@ -82,7 +82,7 @@ const ProductGrid = ({
         pathname === '/' ? 'py-16' : 'py-1'
       }`}
     >
-      <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 sm:px-0  lg:px-">
         {/* Section Header */}
         <div className="flex flex-col items-start">
           <div className="animate-fade-in text-left">

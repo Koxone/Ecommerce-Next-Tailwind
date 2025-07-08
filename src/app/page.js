@@ -38,7 +38,7 @@ export default function HomePage() {
     setSelectedSize,
   } = useMainContext();
   return (
-    <div className="min-h-screen bg-gray-900 md:px-10">
+    <div className="min-h-screen bg-gray-900">
       {/* Hero Carousel Component */}
       <ScrollReveal>
         <Carousel
@@ -55,7 +55,7 @@ export default function HomePage() {
         <ProductGrid />
       </ScrollReveal>
 
-      <div className='flex flex-col gap-6'>
+      <div className="flex w-full max-w-7xl flex-col justify-self-center md:px-10 gap-6">
         {/* Categories Sections */}
         <ScrollReveal>
           <CategoriesContainer title="CATEGORIAS" />

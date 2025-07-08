@@ -24,8 +24,8 @@ const categories = [
 
 export default function CategoriesContainer({ title }) {
   return (
-    <section className="w-full md:px-8 py-4">
-      <div className="animate-fade-in mb-4 text-left">
+    <section className="w-full md:px-8">
+      <div className="animate-fade-in mb-4 pl-5 text-left md:pl-0">
         <h2 className="text-lg font-bold tracking-wider text-neutral-400 uppercase">
           explora
         </h2>
@@ -35,7 +35,7 @@ export default function CategoriesContainer({ title }) {
       </div>
 
       {/* Horizontal Scroll Container */}
-      <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4">
+      <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 px-5 md:px-0">
         {categories.map((cat, idx) => (
           <div
             key={idx}

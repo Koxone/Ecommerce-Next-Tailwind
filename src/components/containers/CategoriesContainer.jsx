@@ -29,7 +29,7 @@ export default function CategoriesContainer({ title }) {
         <h2 className="text-lg uppercase font-bold tracking-wider text-neutral-400">
           explora
         </h2>
-        <h2 className="mb-4 text-2xl font-bold tracking-wider text-white">
+        <h2 className="mb-4 text-2xl uppercase font-bold tracking-wider text-white">
           {title}
         </h2>
       </div>

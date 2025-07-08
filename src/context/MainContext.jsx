@@ -28,8 +28,8 @@ export function MainContextProvider({ children }) {
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedColor, setSelectedColor] = useState(0);
   const [quantity, setQuantity] = useState(1);
-  const [activeTab, setActiveTab] = useState('description');
-  const [activeTabProduct, setActiveTabProduct] = useState('women');
+  const [activeTab, setActiveTab] = useState('women');
+  const [activeTabProduct, setActiveTabProduct] = useState('description');
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [selectedColorIndex, setSelectedColorIndex] = useState(0);
 

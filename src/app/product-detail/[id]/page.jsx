@@ -12,6 +12,7 @@ import {
 import { useMainContext } from '../../../context/MainContext';
 import productsData from '@/data/products/productsData';
 import ExpandableText from '@/components/text/ExpandableText';
+import CategoriesContainer from '@/components/containers/CategoriesContainer';
 
 function ProductDetail({ params }) {
   const { id } = params;
@@ -22,7 +23,6 @@ function ProductDetail({ params }) {
   }
 
   const {
-    activeTab,
     activeTabProduct,
     setActiveTabProduct,
     selectedColorIndex,
@@ -44,7 +44,6 @@ function ProductDetail({ params }) {
     relatedProducts,
     selectedColor,
     selectedSize,
-    setActiveTab,
     setCurrentPage,
     setIsCartOpen,
     setIsMenuOpen,
@@ -236,9 +235,9 @@ function ProductDetail({ params }) {
             {['description', 'features', 'care'].map((tab) => (
               <button
                 key={tab}
-                onClick={() => setActiveTab(tab)}
+                onClick={() => setActiveTabProduct(tab)}
                 className={`cursor-pointer text-sm font-medium capitalize transition ${
-                  activeTab === tab
+                  activeTabProduct === tab
                     ? 'border-b-2 border-white text-white'
                     : 'text-gray-400 hover:text-white'
                 }`}
@@ -248,9 +247,11 @@ function ProductDetail({ params }) {
             ))}
           </div>
           <div className="text-sm text-gray-300">
-            {activeTab === 'description' && <p>{product.about}</p>}
-            {activeTab === 'features' && <p>Features coming soon.</p>}
-            {activeTab === 'care' && <p>Care instructions coming soon.</p>}
+            {activeTabProduct === 'description' && <p>{product.about}</p>}
+            {activeTabProduct === 'features' && <p>Features coming soon.</p>}
+            {activeTabProduct === 'care' && (
+              <p>Care instructions coming soon.</p>
+            )}
           </div>
         </div>
       </div>
@@ -258,6 +259,7 @@ function ProductDetail({ params }) {
       {/* Related Products */}
       <div className="col-span-1 md:col-span-2">
         <ProductGrid title="BUSCAS ALGO MAS?" />
+        <CategoriesContainer title="nuestras categorias" />
       </div>
     </div>
   );

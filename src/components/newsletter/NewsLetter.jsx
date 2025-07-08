@@ -19,7 +19,7 @@ function NewsLetter() {
                 placeholder="Ingresa tu Email"
                 className="font-inter flex-1 rounded-lg border border-gray-600 bg-gray-800 px-4 py-3 text-white placeholder-gray-400 focus:border-transparent focus:ring-2 focus:ring-white focus:outline-none"
               />
-              <button className="font-poppins rounded-lg bg-white px-6 py-3 font-semibold text-gray-900 transition-colors duration-200 hover:bg-gray-100">
+              <button className="font-poppins cursor-pointer rounded-lg bg-white px-6 py-3 font-semibold text-gray-900 transition-colors duration-200 hover:bg-gray-100">
                 Subscribete
               </button>
             </div>

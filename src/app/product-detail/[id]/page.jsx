@@ -1,35 +1,77 @@
 'use client';
 
 import ProductGrid from '@/components/ProductGrid';
-import Carousel from '../../components/carousels/Carousel';
+import Carousel from '../../../components/carousels/Carousel';
 import {
   HeartIcon,
   StarIcon,
   ShareIcon,
   PlusIcon,
   MinusIcon,
-} from '../../components/Icons';
-import { useMainContext } from '../../context/MainContext';
+} from '../../../components/Icons';
+import { useMainContext } from '../../../context/MainContext';
+import productsData from '@/data/products/productsData';
+import ExpandableText from '@/components/text/ExpandableText';
 
-function ProductDetail() {
+function ProductDetail({ params }) {
+  const { id } = params;
+  const product = productsData.find((p) => p.id === Number(id));
+
+  if (!product) {
+    return <div className="p-10 text-white">Producto no encontrado</div>;
+  }
+
   const {
-    product,
-    carouselItems,
-    selectedSize,
-    setSelectedSize,
-    selectedColor,
-    setSelectedColor,
-    quantity,
     activeTab,
-    setActiveTab,
-    isWishlisted,
+    activeTabProduct,
+    setActiveTabProduct,
+    selectedColorIndex,
+    setSelectedColorIndex,
+    isLoggedIn,
+    setIsLoggedIn,
+    heroItems,
+    isRevealed,
+    promoSections,
+    categoryItems,
+    setIsRevealed,
+    currentPage,
     handleQuantityChange,
+    headerButtons,
+    isCartOpen,
+    isMenuOpen,
+    isWishlisted,
+    quantity,
+    relatedProducts,
+    selectedColor,
+    selectedSize,
+    setActiveTab,
+    setCurrentPage,
+    setIsCartOpen,
+    setIsMenuOpen,
     setIsWishlisted,
+    setQuantity,
+    setSelectedColor,
+    setSelectedSize,
   } = useMainContext();
+
+  const currentColorName = product.colors[selectedColor]?.name;
+  const carouselImages = product.images[currentColorName] || [];
+
+  const carouselItems = carouselImages.map((src, i) => (
+    <img
+      key={i}
+      src={src}
+      alt={`${product.name} ${currentColorName} ${i + 1}`}
+      className="h-full w-full object-cover"
+    />
+  ));
+
+  const thumbnails = product.images[currentColorName] || [];
+
   return (
-    <div className="grid w-full grid-cols-1 gap-12 p-8 md:grid-cols-2 md:p-10">
+    <div className="grid w-full max-w-[1200px] grid-cols-1 gap-12 self-center p-8 md:grid-cols-[1fr_1fr] md:p-10">
       {/* Product Images */}
-      <div className="animate-slide-in-left">
+      <div className="animate-slide-in-left flex h-full max-h-[750px] max-w-[550px] flex-col items-center justify-between">
         <Carousel
           items={carouselItems}
           autoPlay={false}
@@ -37,40 +79,37 @@ function ProductDetail() {
           showArrows={true}
           className="mb-6"
         />
+
         {/* Miniatures */}
-        <div className="grid grid-cols-4 gap-3">
-          {product.images.map((image, index) => (
-            <button
+        <div className="grid grid-cols-4 gap-3 lg:flex lg:w-full lg:overflow-x-auto">
+          {thumbnails.map((image, index) => (
+            <div
               key={index}
-              onClick={() => setSelectedColor(index)}
-              className={`aspect-square overflow-hidden rounded-lg border-2 bg-gray-800 transition-all duration-200 hover:scale-105 ${
-                selectedColor === index
-                  ? 'border-white'
-                  : 'border-gray-600 hover:border-gray-400'
-              }`}
+              className="aspect-square overflow-hidden rounded-lg border-gray-600 bg-gray-800 transition-all duration-200 hover:scale-105 hover:border-gray-400 lg:min-w-[190px]"
             >
               <img
                 src={image}
                 alt={`${product.name} thumbnail ${index + 1}`}
                 className="h-full w-full object-cover"
               />
-            </button>
+            </div>
           ))}
         </div>
       </div>
 
       {/* Product Info */}
-      <div className="animate-slide-in-right rounded-lg text-white">
+      <div className="animate-slide-in-right max-w-[500px] rounded-lg text-white">
         {product.isNew && (
           <span className="mb-4 inline-block rounded bg-white px-3 py-1 text-xs font-semibold text-gray-900">
             NEW
           </span>
         )}
-        <h1 className="font-montserrat mb-2 text-3xl font-bold md:text-4xl lg:text-5xl">
+        <h1 className="font-montserrat mb-5 text-3xl font-bold md:text-4xl lg:text-5xl">
           {product.name}
         </h1>
-        <p className="font-inter mb-4 text-base text-gray-300 md:text-lg">
-          {product.description}
+
+        <p className="font-inter mb-4 max-h-[200px] overflow-auto text-base text-gray-300 md:text-lg">
+          <ExpandableText text={`${product.description}`} />
         </p>
 
         {/* Rating */}
@@ -110,7 +149,7 @@ function ProductDetail() {
         {/* Color Selection */}
         <div className="mb-6">
           <h3 className="mb-2 text-sm font-semibold md:text-base">
-            Color: {product.colors[selectedColor]?.name}
+            Color: {currentColorName}
           </h3>
           <div className="flex gap-2">
             {product.colors.map((color, index) => (
@@ -209,22 +248,16 @@ function ProductDetail() {
             ))}
           </div>
           <div className="text-sm text-gray-300">
-            {activeTab === 'description' && <p>{product.fullDescription}</p>}
-            {activeTab === 'features' && (
-              <ul className="list-disc space-y-1 pl-5">
-                {product.features.map((feature, i) => (
-                  <li key={i}>{feature}</li>
-                ))}
-              </ul>
-            )}
-            {activeTab === 'care' && <p>{product.care}</p>}
+            {activeTab === 'description' && <p>{product.about}</p>}
+            {activeTab === 'features' && <p>Features coming soon.</p>}
+            {activeTab === 'care' && <p>Care instructions coming soon.</p>}
           </div>
         </div>
       </div>
 
       {/* Related Products */}
       <div className="col-span-1 md:col-span-2">
-        <ProductGrid title='BUSCAS ALGO MAS?' />
+        <ProductGrid title="BUSCAS ALGO MAS?" />
       </div>
     </div>
   );

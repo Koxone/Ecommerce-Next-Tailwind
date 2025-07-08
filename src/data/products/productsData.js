@@ -2,12 +2,32 @@ const productsData = [
   {
     id: 1,
     name: 'Sandy Bra',
-    description: "Women's Seamless Scrunch Bra",
+    description:
+      'Highlights This bra is a tight fit Adjustable straps Designed for low-impact activity The suggested cup size is A/B/C Must size up Description The new Sandy Bra features a perfect triangle-cut shape with an open, minimal back and adjustable straps. Added hooks on the back let you wear the straps straight or crossed for a customized fit. This bra fits true to size for A/B/C cups and is ideal for low-impact activities. If you have a larger cup size, we suggest sizing up. Crafted from our signature Amplify fabric, it delivers an irresistibly silky, smooth hand feel, while the full-interlocking knit offers flexibility to move freely.',
+    about:
+      'Fit suggestion This bra fits true to size for A/B/C cups and is ideal for low-impact activities. We suggest sizing up. Brittney is 5’2”/157.5cm, wearing a size S with 33.5\"/85cm bust. Materials and washing directions 51% Polyamide, 38% Polyester, 11% Elastane We recommend washing inside-out on a cold setting with like colors Hang to dry',
     color: 'Acai Berry',
     price: 48,
-    image: '/Muestra.jpg',
-    images: ['/Muestra.jpg', '/Muestra.jpg'],
-    colors: ['#8B5CF6', '#1F2937', '#EF4444'],
+    images: {
+      Blue: [
+        '/id-1-1-blue.webp',
+        '/id-1-2-blue.webp',
+        '/id-1-3-blue.webp',
+        '/id-1-4-blue.webp',
+        '/id-1-5-blue.webp',
+      ],
+      Purple: [
+        '/id-1-1-purple.webp',
+        '/id-1-2-purple.webp',
+        '/id-1-3-purple.webp',
+        '/id-1-4-purple.webp',
+        '/id-1-5-purple.webp',
+      ],
+    },
+    colors: [
+      { name: 'Blue', value: '#3B82F6' },
+      { name: 'Purple', value: '#8B5CF6' },
+    ],
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     rating: 4.5,
     reviewCount: 128,
@@ -21,7 +41,7 @@ const productsData = [
     color: 'Acai Berry',
     price: 50,
     image: '/Muestra.jpg',
-    images: ['/Muestra.jpg', '/Muestra.jpg'],
+    images: ['/Muestra.jpg', '/Muestra.jpg', '/Muestra.jpg'],
     colors: ['#10B981', '#1F2937'],
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     rating: 4.8,

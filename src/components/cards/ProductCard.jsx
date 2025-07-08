@@ -12,59 +12,37 @@ const ProductCard = ({
   product,
   className = '',
 }) => {
-  const router = useRouter();
-  const handleClick = () => {
-    router.push('/product-detail');
-  };
+  const { isWishlisted, setIsWishlisted } = useMainContext();
 
-  const {
-    activeTab,
-    heroItems,
-    selectedColorIndex,
-    setSelectedColorIndex,
-    isRevealed,
-    promoSections,
-    categoryItems,
-    setIsRevealed,
-    carouselItems,
-    currentPage,
-    handleQuantityChange,
-    headerButtons,
-    isCartOpen,
-    isMenuOpen,
-    isWishlisted,
-    quantity,
-    relatedProducts,
-    selectedColor,
-    selectedSize,
-    setActiveTab,
-    setCurrentPage,
-    setIsCartOpen,
-    setIsMenuOpen,
-    setIsWishlisted,
-    setQuantity,
-    setSelectedColor,
-    setSelectedSize,
-  } = useMainContext();
+  const [localColorIndex, setLocalColorIndex] = useState(0);
+  const router = useRouter();
 
   const handleWishlistToggle = () => {
     setIsWishlisted(!isWishlisted);
   };
 
   const handleColorSelect = (index) => {
-    setSelectedColorIndex(index);
+    setLocalColorIndex(index);
   };
+
+  const handleClick = () => {
+    router.push(`/product-detail/${product.id}`);
+  };
+
+  const currentColorName = product.colors?.[localColorIndex]?.name;
+  const productImages = product.images?.[currentColorName];
+  const displayImage = productImages ? productImages[0] : product.image;
 
   return (
     <div
-      className={`group hover-lift relative max-w-[300px] overflow-hidden rounded-lg border border-neutral-300/10 bg-gray-800 transition-all duration-300 md:max-h-fit md:max-w-[300px] ${className}`}
+      className={`group hover-lift relative max-w-[300px] overflow-hidden rounded-lg border border-neutral-300/10 bg-gray-800 transition-all duration-300 ${className}`}
     >
       {/* Product Image */}
-      <div className="relative aspect-square w-full overflow-hidden md:h-fit md:w-full">
+      <div className="relative aspect-square w-full overflow-hidden">
         <img
-          src={product.images?.[selectedColorIndex] || product.image}
+          src={displayImage}
           alt={product.name}
-          className="w-full object-cover transition-transform duration-500 group-hover:scale-105 md:h-full md:max-h-[300px] md:w-full md:object-cover"
+          className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
 
         {/* Badges */}
@@ -118,11 +96,11 @@ const ProductCard = ({
                 key={index}
                 onClick={() => handleColorSelect(index)}
                 className={`hover-scale focus-ring h-6 w-6 rounded-full border-2 transition-all duration-200 ${
-                  selectedColorIndex === index
+                  localColorIndex === index
                     ? 'border-white'
                     : 'border-gray-600 hover:border-gray-400'
                 }`}
-                style={{ backgroundColor: color }}
+                style={{ backgroundColor: color.value }}
               />
             ))}
           </div>

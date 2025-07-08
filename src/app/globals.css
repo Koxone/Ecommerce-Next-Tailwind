@@ -67,3 +67,10 @@ body {
 *::-webkit-scrollbar-corner {
   background: transparent;
 }
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* número de líneas a mostrar */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

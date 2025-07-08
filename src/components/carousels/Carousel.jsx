@@ -44,15 +44,23 @@ const Carousel = ({
   if (!items.length) return null;
 
   return (
-    <div className={`relative overflow-hidden ${className}`}>
+    <div className={`relative w-full overflow-hidden rounded-lg ${className}`}>
       {/* Carousel Content */}
       <div
-        className={`flex ${pathname === '/' ? '' : 'max-h-[600px]'} transition-transform duration-500 ease-in-out`}
+        className={`flex ${pathname === '/' ? '' : ''} transition-transform duration-500 ease-in-out`}
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
         {items.map((item, index) => (
           <div key={index} className="w-full flex-shrink-0">
-            {item}
+            {typeof item === 'string' ? (
+              <img
+                src={item}
+                alt={`Carousel Image ${index + 1}`}
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              item
+            )}
           </div>
         ))}
       </div>

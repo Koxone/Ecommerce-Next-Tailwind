@@ -24,36 +24,38 @@ const categories = [
 
 export default function CategoriesContainer({ title }) {
   return (
-    <section className="h-fit w-full overflow-hidden px-8 py-4">
-      <div className="animate-fade-in text-left">
-        <h2 className="text-lg uppercase font-bold tracking-wider text-neutral-400">
+    <section className="w-full md:px-8 py-4">
+      <div className="animate-fade-in mb-4 text-left">
+        <h2 className="text-lg font-bold tracking-wider text-neutral-400 uppercase">
           explora
         </h2>
-        <h2 className="mb-4 text-2xl uppercase font-bold tracking-wider text-white">
+        <h2 className="text-2xl font-bold tracking-wider text-white uppercase">
           {title}
         </h2>
       </div>
-      <div className="mx-auto grid h-full max-w-screen-xl gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+
+      {/* Horizontal Scroll Container */}
+      <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4">
         {categories.map((cat, idx) => (
           <div
             key={idx}
-            className="group relative h-96 overflow-hidden rounded-lg border border-neutral-600/40"
+            className="group relative h-[400px] min-w-[80%] snap-center overflow-hidden rounded-lg border border-neutral-600/40 sm:min-w-[60%] md:min-w-[40%] lg:min-w-[30%]"
           >
             <a href={cat.href} className="absolute inset-0">
               <img
                 src={cat.img}
                 alt={cat.title}
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 ease-out group-hover:scale-125"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 ease-out group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-black/10"></div>
+              <div className="absolute inset-0 bg-black/20"></div>
             </a>
             <div className="absolute bottom-0 left-0 flex flex-col gap-4 p-6">
-              <h3 className="text-3xl font-bold text-white uppercase">
+              <h3 className="text-2xl font-bold text-white uppercase">
                 {cat.title}
               </h3>
               <a
                 href={cat.href}
-                className="rounded-full bg-white px-14 py-3 text-center font-semibold text-black uppercase transition-all duration-300 ease-in-out hover:bg-neutral-300"
+                className="rounded-full bg-white px-10 py-2 text-center font-semibold text-black uppercase transition-all duration-300 ease-in-out hover:bg-neutral-300"
               >
                 Shop Now
               </a>

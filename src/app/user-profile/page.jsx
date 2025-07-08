@@ -1,19 +1,21 @@
-import React, { useState } from "react";
+'use client';
+
+import React, { useState } from 'react';
 
 const UserProfile = () => {
-  const [activeTab, setActiveTab] = useState("profile");
+  const [activeTab, setActiveTab] = useState('profile');
   const [isEditing, setIsEditing] = useState(false);
   const [showChangePassword, setShowChangePassword] = useState(false);
 
   const [formData, setFormData] = useState({
-    firstName: "John",
-    lastName: "Doe",
-    email: "john@example.com",
-    phone: "",
-    dateOfBirth: "",
-    currentPassword: "",
-    newPassword: "",
-    confirmPassword: "",
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'john@example.com',
+    phone: '',
+    dateOfBirth: '',
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: '',
   });
 
   const handleInputChange = (e) => {
@@ -26,33 +28,33 @@ const UserProfile = () => {
 
   const handleSaveProfile = () => {
     setIsEditing(false);
-    alert("Profile updated (mock).");
+    alert('Profile updated (mock).');
   };
 
   const handleLogout = () => {
-    alert("Logged out (mock).");
+    alert('Logged out (mock).');
   };
 
   const orders = [
     {
-      id: "ORD-001",
-      date: "2024-01-15",
-      status: "Delivered",
+      id: 'ORD-001',
+      date: '2024-01-15',
+      status: 'Delivered',
       total: 156.0,
       items: [
-        { name: "Sandy Bra", quantity: 1, price: 48 },
-        { name: "Pump Legging", quantity: 1, price: 70 },
-        { name: "Push Tank", quantity: 1, price: 46 },
+        { name: 'Sandy Bra', quantity: 1, price: 48 },
+        { name: 'Pump Legging', quantity: 1, price: 70 },
+        { name: 'Push Tank', quantity: 1, price: 46 },
       ],
     },
     {
-      id: "ORD-002",
-      date: "2024-01-10",
-      status: "Shipped",
+      id: 'ORD-002',
+      date: '2024-01-10',
+      status: 'Shipped',
       total: 97.0,
       items: [
-        { name: "Alpha Tank", quantity: 1, price: 42 },
-        { name: "Elite Shorts", quantity: 1, price: 55 },
+        { name: 'Alpha Tank', quantity: 1, price: 42 },
+        { name: 'Elite Shorts', quantity: 1, price: 55 },
       ],
     },
   ];
@@ -71,30 +73,30 @@ const UserProfile = () => {
           <p className="text-gray-400">{formData.email}</p>
           <button
             onClick={() => setIsEditing(!isEditing)}
-            className="mt-2 text-blue-400 transition hover:text-blue-300"
+            className="mt-2 cursor-pointer text-blue-400 transition hover:text-blue-300"
           >
-            {isEditing ? "Cancel" : "Edit Profile"}
+            {isEditing ? 'Cancel' : 'Edit Profile'}
           </button>
         </div>
       </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        {["firstName", "lastName", "email", "phone", "dateOfBirth"].map(
+        {['firstName', 'lastName', 'email', 'phone', 'dateOfBirth'].map(
           (field, idx) => (
             <div
               key={idx}
-              className={field === "dateOfBirth" ? "md:col-span-2" : ""}
+              className={field === 'dateOfBirth' ? 'md:col-span-2' : ''}
             >
               <label className="mb-1 block text-sm text-gray-300 capitalize">
-                {field.replace(/([A-Z])/g, " $1")}
+                {field.replace(/([A-Z])/g, ' $1')}
               </label>
               <input
                 type={
-                  field === "email"
-                    ? "email"
-                    : field === "dateOfBirth"
-                      ? "date"
-                      : "text"
+                  field === 'email'
+                    ? 'email'
+                    : field === 'dateOfBirth'
+                      ? 'date'
+                      : 'text'
                 }
                 name={field}
                 value={formData[field]}
@@ -103,14 +105,14 @@ const UserProfile = () => {
                 className="w-full rounded border border-gray-600 bg-gray-800 p-3 text-white focus:ring focus:ring-white focus:outline-none disabled:opacity-50"
               />
             </div>
-          ),
+          )
         )}
       </div>
 
       {isEditing && (
         <button
           onClick={handleSaveProfile}
-          className="rounded bg-white px-6 py-2 text-gray-900 transition hover:bg-gray-200"
+          className="cursor-pointer rounded bg-white px-6 py-2 text-gray-900 transition hover:bg-gray-200"
         >
           Save Changes
         </button>
@@ -119,14 +121,14 @@ const UserProfile = () => {
       <div className="border-t border-gray-700 pt-4">
         <button
           onClick={() => setShowChangePassword(!showChangePassword)}
-          className="mt-2 text-blue-400 transition hover:text-blue-300"
+          className="mt-2 cursor-pointer text-blue-400 transition hover:text-blue-300"
         >
           Change Password
         </button>
 
         {showChangePassword && (
           <div className="mt-4 space-y-2">
-            {["currentPassword", "newPassword", "confirmPassword"].map(
+            {['currentPassword', 'newPassword', 'confirmPassword'].map(
               (field, idx) => (
                 <input
                   key={idx}
@@ -134,12 +136,12 @@ const UserProfile = () => {
                   name={field}
                   value={formData[field]}
                   onChange={handleInputChange}
-                  placeholder={field.replace(/([A-Z])/g, " $1")}
+                  placeholder={field.replace(/([A-Z])/g, ' $1')}
                   className="w-full rounded border border-gray-600 bg-gray-800 p-3 text-white focus:ring focus:ring-white focus:outline-none"
                 />
-              ),
+              )
             )}
-            <button className="rounded bg-white px-6 py-2 text-gray-900 transition hover:bg-gray-200">
+            <button className="cursor-pointer rounded bg-white px-6 py-2 text-gray-900 transition hover:bg-gray-200">
               Update Password
             </button>
           </div>
@@ -161,7 +163,7 @@ const UserProfile = () => {
             <div className="text-right">
               <span
                 className={`rounded-full px-2 py-1 text-xs ${
-                  order.status === "Delivered" ? "bg-green-700" : "bg-blue-700"
+                  order.status === 'Delivered' ? 'bg-green-700' : 'bg-blue-700'
                 } text-white`}
               >
                 {order.status}
@@ -197,21 +199,21 @@ const UserProfile = () => {
           <h1 className="text-2xl font-bold text-white">My Account</h1>
           <button
             onClick={handleLogout}
-            className="flex items-center gap-2 text-red-400 transition hover:text-red-300"
+            className="flex cursor-pointer items-center gap-2 text-red-400 transition hover:text-red-300"
           >
             Sign Out
           </button>
         </div>
 
         <div className="flex overflow-hidden rounded bg-gray-800">
-          {["profile", "orders", "wishlist"].map((tab) => (
+          {['profile', 'orders', 'wishlist'].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`flex-1 py-2 transition ${
+              className={`flex-1 cursor-pointer py-2 transition ${
                 activeTab === tab
-                  ? "bg-white text-gray-900"
-                  : "text-gray-300 hover:bg-gray-700 hover:text-white"
+                  ? 'bg-white text-gray-900'
+                  : 'text-gray-300 hover:bg-gray-700 hover:text-white'
               }`}
             >
               {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -219,9 +221,9 @@ const UserProfile = () => {
           ))}
         </div>
 
-        {activeTab === "profile" && renderProfileTab()}
-        {activeTab === "orders" && renderOrdersTab()}
-        {activeTab === "wishlist" && renderWishlistTab()}
+        {activeTab === 'profile' && renderProfileTab()}
+        {activeTab === 'orders' && renderOrdersTab()}
+        {activeTab === 'wishlist' && renderWishlistTab()}
       </div>
     </div>
   );

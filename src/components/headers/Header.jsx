@@ -13,10 +13,19 @@ import HeaderButton from '../buttons/HeaderButton';
 import Cart from '../cart/Cart';
 import { useMainContext } from '@/context/MainContext';
 import MobileMenu from '../nav/MobileMenu';
+import LogoButton from '../buttons/LogoButton';
+import { useRouter } from 'next/navigation';
 
 const Header = () => {
   const {
     activeTab,
+    isLoggedIn,
+    setIsLoggedIn,
+    heroItems,
+    isRevealed,
+    promoSections,
+    categoryItems,
+    setIsRevealed,
     carouselItems,
     currentPage,
     handleQuantityChange,
@@ -39,6 +48,15 @@ const Header = () => {
     setSelectedSize,
   } = useMainContext();
 
+  const router = useRouter();
+  const handleClick = () => {
+    if (!isLoggedIn) {
+      router.push('/auth/login');
+    } else {
+      router.push('/user-profile');
+    }
+  };
+
   return (
     <>
       {/* Top Banner */}
@@ -50,13 +68,7 @@ const Header = () => {
       <header className="sticky top-0 z-50 border-b border-gray-700 bg-gray-900">
         <div className="grid h-16 w-full grid-cols-[auto_1fr_auto] items-center justify-between pl-5">
           {/* Logo */}
-          <button className="flex max-w-[120px] cursor-pointer items-center md:h-[37px] md:max-w-[160px]">
-            {/* <p className="flex items-center text-[30px] font-extrabold md:text-5xl">
-              <span className="bg-red-500 px-1 text-gray-900">FWS</span>
-              <span className="-ml-1.5 font-bold text-white">HOP</span>
-            </p> */}
-            <img src="/logo.png" alt="" />
-          </button>
+          <LogoButton />
 
           {/* Desktop Navigation Buttons */}
           <nav className="hidden justify-center space-x-8 lg:flex">
@@ -74,7 +86,10 @@ const Header = () => {
             <button className="cursor-pointer p-2 text-gray-300 hover:text-white">
               <SearchIcon size={20} />
             </button>
-            <button className="cursor-pointer p-2 text-gray-300 hover:text-white">
+            <button
+              onClick={handleClick}
+              className="cursor-pointer p-2 text-gray-300 hover:text-white"
+            >
               <UserIcon size={20} />
             </button>
             <button

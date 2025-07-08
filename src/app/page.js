@@ -2,8 +2,7 @@
 
 import Carousel from '@/components/carousels/Carousel';
 import PromotionalContainer from '@/components/containers/PromotionalContainer';
-import Footer from '@/components/footers/Footer';
-import Header from '@/components/headers/Header';
+import NewsLetter from '@/components/newsletter/NewsLetter';
 import ProductGrid from '@/components/ProductGrid';
 import { useMainContext } from '@/context/MainContext';
 import ScrollReveal from '@/utils/ScrollReveal';
@@ -39,12 +38,7 @@ export default function HomePage() {
   } = useMainContext();
   return (
     <div className="min-h-screen bg-gray-900">
-      {/* Header Component */}
-      <ScrollReveal>
-        <Header />
-      </ScrollReveal>
-
-      {/* Carousel Component */}
+      {/* Hero Carousel Component */}
       <ScrollReveal>
         <Carousel
           items={heroItems}
@@ -65,9 +59,8 @@ export default function HomePage() {
         <PromotionalContainer />
       </ScrollReveal>
 
-      {/* Footer Component */}
       <ScrollReveal>
-        <Footer />
+        <NewsLetter />
       </ScrollReveal>
     </div>
   );

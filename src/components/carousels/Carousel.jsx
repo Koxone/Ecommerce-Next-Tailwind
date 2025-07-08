@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from '../Icons';
+import { usePathname } from 'next/navigation';
 
 const Carousel = ({
   items = [],
@@ -12,6 +13,8 @@ const Carousel = ({
   className = '',
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const pathname = usePathname();
 
   // Auto-play functionality
   useEffect(() => {
@@ -44,7 +47,7 @@ const Carousel = ({
     <div className={`relative overflow-hidden ${className}`}>
       {/* Carousel Content */}
       <div
-        className="flex transition-transform duration-500 ease-in-out"
+        className={`flex ${pathname === '/' ? '' : 'max-h-[600px]'} transition-transform duration-500 ease-in-out`}
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
         {items.map((item, index) => (
@@ -59,13 +62,13 @@ const Carousel = ({
         <>
           <button
             onClick={goToPrevious}
-            className="bg-opacity-50 hover:bg-opacity-75 cursor-pointer hover-scale focus-ring absolute top-1/2 left-4 z-10 -translate-y-1/2 transform rounded-full bg-black p-2 text-white transition-all duration-200"
+            className="bg-opacity-50 hover:bg-opacity-75 hover-scale focus-ring absolute top-1/2 left-4 z-10 -translate-y-1/2 transform cursor-pointer rounded-full bg-black p-2 text-white transition-all duration-200"
           >
             <ChevronLeftIcon size={20} />
           </button>
           <button
             onClick={goToNext}
-            className="bg-opacity-50 hover:bg-opacity-75 cursor-pointer hover-scale focus-ring absolute top-1/2 right-4 z-10 -translate-y-1/2 transform rounded-full bg-black p-2 text-white transition-all duration-200"
+            className="bg-opacity-50 hover:bg-opacity-75 hover-scale focus-ring absolute top-1/2 right-4 z-10 -translate-y-1/2 transform cursor-pointer rounded-full bg-black p-2 text-white transition-all duration-200"
           >
             <ChevronRightIcon size={20} />
           </button>
@@ -79,7 +82,7 @@ const Carousel = ({
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`focus-ring cursor-pointer h-3 w-3 rounded-full transition-all duration-200 ${
+              className={`focus-ring h-3 w-3 cursor-pointer rounded-full transition-all duration-200 ${
                 index === currentIndex
                   ? 'bg-white'
                   : 'bg-opacity-50 hover:bg-opacity-75 bg-white'

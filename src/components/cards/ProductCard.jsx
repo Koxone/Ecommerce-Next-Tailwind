@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { HeartIcon, StarIcon } from '../Icons';
 import { useMainContext } from '@/context/MainContext';
+import { useRouter } from 'next/navigation';
 
 const ProductCard = ({
   showQuickView = true,
@@ -11,6 +12,11 @@ const ProductCard = ({
   className = '',
 }) => {
   const [selectedColorIndex, setSelectedColorIndex] = useState(0);
+
+  const router = useRouter();
+  const handleClick = () => {
+    router.push('/product-detail');
+  };
 
   const {
     activeTab,
@@ -51,7 +57,7 @@ const ProductCard = ({
 
   return (
     <div
-      className={`group hover-lift relative max-w-[300px] overflow-hidden rounded-lg bg-gray-800 transition-all duration-300 md:max-h-fit md:max-w-[300px] ${className}`}
+      className={`group border border-neutral-300/10 hover-lift relative max-w-[300px] overflow-hidden rounded-lg bg-gray-800 transition-all duration-300 md:max-h-fit md:max-w-[300px] ${className}`}
     >
       {/* Product Image */}
       <div className="relative aspect-square w-full overflow-hidden md:h-fit md:w-full">
@@ -92,7 +98,10 @@ const ProductCard = ({
         {/* Quick View Button */}
         {showQuickView && (
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-            <button className="focus-ring w-full cursor-pointer rounded bg-white px-4 py-2 font-semibold text-gray-900 transition-colors duration-200 hover:bg-gray-300">
+            <button
+              onClick={handleClick}
+              className="focus-ring w-full cursor-pointer rounded bg-white px-4 py-2 font-semibold text-gray-900 transition-colors duration-200 hover:bg-gray-300"
+            >
               Quick View
             </button>
           </div>

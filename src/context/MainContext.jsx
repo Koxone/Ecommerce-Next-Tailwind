@@ -14,6 +14,9 @@ export function MainContextProvider({ children }) {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isRevealed, setIsRevealed] = useState(false);
 
+  // Auth Handlers
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const headerButtons = [
     { text: 'MUJER', value: 'women' },
     { text: 'HOMBRE', value: 'men' },
@@ -258,6 +261,8 @@ export function MainContextProvider({ children }) {
     <MainContext.Provider
       value={{
         activeTab,
+        isLoggedIn,
+        setIsLoggedIn,
         heroItems,
         isRevealed,
         promoSections,

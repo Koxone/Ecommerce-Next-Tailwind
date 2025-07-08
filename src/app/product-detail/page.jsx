@@ -1,4 +1,7 @@
-import Carousel from '../carousels/Carousel';
+'use client';
+
+import ProductGrid from '@/components/ProductGrid';
+import Carousel from '../../components/carousels/Carousel';
 import {
   HeartIcon,
   StarIcon,
@@ -24,7 +27,7 @@ function ProductDetail() {
     setIsWishlisted,
   } = useMainContext();
   return (
-    <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
+    <div className="grid w-full grid-cols-1 gap-12 p-8 md:grid-cols-2 md:p-10">
       {/* Product Images */}
       <div className="animate-slide-in-left">
         <Carousel
@@ -57,7 +60,7 @@ function ProductDetail() {
       </div>
 
       {/* Product Info */}
-      <div className="animate-slide-in-right">
+      <div className="animate-slide-in-right rounded-lg text-white">
         {product.isNew && (
           <span className="mb-4 inline-block rounded bg-white px-3 py-1 text-xs font-semibold text-gray-900">
             NEW
@@ -114,7 +117,7 @@ function ProductDetail() {
               <button
                 key={index}
                 onClick={() => setSelectedColor(index)}
-                className={`h-10 w-10 rounded-full border-2 transition duration-200 hover:scale-110 ${
+                className={`h-10 w-10 cursor-pointer rounded-full border-2 transition duration-200 hover:scale-110 ${
                   selectedColor === index
                     ? 'border-white'
                     : 'border-gray-600 hover:border-gray-400'
@@ -133,7 +136,7 @@ function ProductDetail() {
               <button
                 key={size}
                 onClick={() => setSelectedSize(size)}
-                className={`rounded-lg border px-3 py-2 text-sm font-medium transition duration-200 ${
+                className={`cursor-pointer rounded-lg border px-3 py-2 text-sm font-medium transition duration-200 ${
                   selectedSize === size
                     ? 'border-white bg-white text-gray-900'
                     : 'border-gray-600 text-gray-300 hover:border-white hover:text-white'
@@ -154,14 +157,14 @@ function ProductDetail() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => handleQuantityChange(-1)}
-              className="rounded bg-gray-700 p-2 hover:bg-gray-600"
+              className="cursor-pointer rounded bg-gray-700 p-2 hover:bg-gray-600"
             >
               <MinusIcon size={14} />
             </button>
             <span className="px-3 font-medium">{quantity}</span>
             <button
               onClick={() => handleQuantityChange(1)}
-              className="rounded bg-gray-700 p-2 hover:bg-gray-600"
+              className="cursor-pointer rounded bg-gray-700 p-2 hover:bg-gray-600"
             >
               <PlusIcon size={14} />
             </button>
@@ -170,12 +173,12 @@ function ProductDetail() {
 
         {/* Action Buttons */}
         <div className="mb-8 flex flex-col gap-3 sm:flex-row">
-          <button className="flex-1 rounded-lg bg-white px-4 py-3 text-sm font-semibold text-gray-900 transition hover:bg-gray-100 md:text-base">
+          <button className="flex-1 cursor-pointer rounded-lg bg-white px-4 py-3 text-sm font-semibold text-gray-900 transition hover:bg-gray-300 md:text-base">
             Add to Cart
           </button>
           <button
             onClick={() => setIsWishlisted(!isWishlisted)}
-            className={`rounded-lg border p-3 transition ${
+            className={`cursor-pointer rounded-lg border p-3 transition ${
               isWishlisted
                 ? 'border-red-500 bg-red-500 text-white'
                 : 'border-gray-600 text-gray-300 hover:border-white hover:text-white'
@@ -183,7 +186,7 @@ function ProductDetail() {
           >
             <HeartIcon size={18} filled={isWishlisted} />
           </button>
-          <button className="rounded-lg border border-gray-600 p-3 text-gray-300 transition hover:border-white hover:text-white">
+          <button className="cursor-pointer rounded-lg border border-gray-600 p-3 text-gray-300 transition hover:border-white hover:text-white">
             <ShareIcon size={18} />
           </button>
         </div>
@@ -195,7 +198,7 @@ function ProductDetail() {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`text-sm font-medium capitalize transition ${
+                className={`cursor-pointer text-sm font-medium capitalize transition ${
                   activeTab === tab
                     ? 'border-b-2 border-white text-white'
                     : 'text-gray-400 hover:text-white'
@@ -217,6 +220,11 @@ function ProductDetail() {
             {activeTab === 'care' && <p>{product.care}</p>}
           </div>
         </div>
+      </div>
+
+      {/* Related Products */}
+      <div className="col-span-1 md:col-span-2">
+        <ProductGrid title='BUSCAS ALGO MAS?' />
       </div>
     </div>
   );

@@ -2,10 +2,9 @@
 
 import { useState } from 'react';
 import ProductCard from './cards/ProductCard';
-import { FilterIcon, GridIcon, ListIcon } from './Icons';
 import { useMainContext } from '@/context/MainContext';
 import productsData from '@/data/products/productsData';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 const ProductGrid = ({
   title = 'SHOP DROP 1',
@@ -18,11 +17,13 @@ const ProductGrid = ({
   const [viewMode, setViewMode] = useState('grid');
   const [sortBy, setSortBy] = useState('featured');
 
+  const pathname = usePathname();
+
   const router = useRouter();
 
   const handleClick = () => {
-    router.push('/product-view')
-  }
+    router.push('/product-view');
+  };
 
   const {
     activeTab,
@@ -122,7 +123,7 @@ const ProductGrid = ({
         <div
           className={`animate-fade-in gap-6 ${
             viewMode === 'grid'
-              ? 'flex snap-x snap-mandatory overflow-x-auto sm:grid sm:grid-cols-2 xl:grid xl:grid-cols-4'
+              ? 'flex snap-x snap-mandatory overflow-x-auto xl:grid xl:grid-cols-4'
               : 'grid grid-cols-1'
           }`}
         >
@@ -142,9 +143,10 @@ const ProductGrid = ({
 
         {/* View All Button */}
         <div className="animate-fade-in mt-12 text-center">
-          <button 
-          onClick={handleClick}
-          className="hover-lift focus-ring font-poppins rounded-lg bg-white px-8 py-3 font-semibold text-gray-900 transition-all duration-200 hover:bg-gray-100">
+          <button
+            onClick={handleClick}
+            className="hover-lift focus-ring font-poppins cursor-pointer rounded-lg bg-white px-8 py-3 font-semibold text-gray-900 transition-all duration-200 hover:bg-gray-400"
+          >
             View All
           </button>
         </div>

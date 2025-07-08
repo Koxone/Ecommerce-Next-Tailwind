@@ -1,6 +1,7 @@
 'use client';
 
 import Carousel from '@/components/carousels/Carousel';
+import CategoriesContainer from '@/components/containers/CategoriesContainer';
 import PromotionalContainer from '@/components/containers/PromotionalContainer';
 import NewsLetter from '@/components/newsletter/NewsLetter';
 import ProductGrid from '@/components/ProductGrid';
@@ -37,7 +38,7 @@ export default function HomePage() {
     setSelectedSize,
   } = useMainContext();
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className="min-h-screen bg-gray-900 md:px-10">
       {/* Hero Carousel Component */}
       <ScrollReveal>
         <Carousel
@@ -54,10 +55,17 @@ export default function HomePage() {
         <ProductGrid />
       </ScrollReveal>
 
-      {/* Promotional Sections */}
-      <ScrollReveal>
-        <PromotionalContainer />
-      </ScrollReveal>
+      <div className='flex flex-col gap-6'>
+        {/* Categories Sections */}
+        <ScrollReveal>
+          <CategoriesContainer title="CATEGORIAS" />
+        </ScrollReveal>
+
+        {/* Promotional Sections */}
+        <ScrollReveal>
+          <PromotionalContainer title="NOVEDADES" />
+        </ScrollReveal>
+      </div>
 
       <ScrollReveal>
         <NewsLetter />

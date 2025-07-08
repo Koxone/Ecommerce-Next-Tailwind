@@ -1,7 +1,7 @@
 import { useMainContext } from '@/context/MainContext';
 import React from 'react';
 
-function PromotionalContainer() {
+function PromotionalContainer({ title }) {
   const {
     activeTab,
     heroItems,
@@ -31,7 +31,15 @@ function PromotionalContainer() {
     setSelectedSize,
   } = useMainContext();
   return (
-    <section className="bg-gray-900 pb-16">
+    <section className="bg-gray-900 px-8 pb-16">
+      <div className="animate-fade-in text-left">
+        <h2 className="text-lg uppercase font-bold tracking-wider text-neutral-400">
+          explora
+        </h2>
+        <h2 className="mb-4 text-2xl font-bold tracking-wider text-white">
+          {title}
+        </h2>
+      </div>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {promoSections.map((section, index) => (
@@ -41,7 +49,7 @@ function PromotionalContainer() {
               style={{ animationDelay: `${index * 0.2}s` }}
             >
               <div
-                className="relative flex h-96 items-center justify-center bg-cover bg-center text-center transition-all duration-500 ease-in-out hover:scale-110"
+                className="relative flex h-96 cursor-pointer items-center justify-center border border-neutral-600/40 bg-cover bg-center text-center transition-all duration-500 ease-in-out hover:scale-110"
                 style={{ backgroundImage: `url(${section.image})` }}
               >
                 <div className="absolute inset-0 bg-black/40 transition-all duration-300 group-hover:bg-black/50"></div>

@@ -12,7 +12,7 @@ const ProductCard = ({
   product,
   className = '',
 }) => {
-  const { isWishlisted, setIsWishlisted } = useMainContext();
+  const { isWishlisted, setIsWishlisted, selectedColor } = useMainContext();
 
   const [localColorIndex, setLocalColorIndex] = useState(0);
   const router = useRouter();
@@ -113,15 +113,15 @@ const ProductCard = ({
 
         {/* Product Description */}
         {product.description && (
-          <p className="font-inter mb-2 text-sm text-gray-400">
-            {product.description}
+          <p className="font-inter mb-2 max-h-20 overflow-y-auto text-sm text-gray-400">
+            {product.cardText}
           </p>
         )}
 
         {/* Product Color/Variant */}
-        {product.color && (
+        {product.colors && product.colors.length > 0 && (
           <p className="font-inter mb-2 text-sm text-gray-500">
-            {product.color}
+            {product.colors[localColorIndex]?.name}
           </p>
         )}
 

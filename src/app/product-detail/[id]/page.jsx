@@ -85,7 +85,7 @@ function ProductDetail({ params }) {
           {thumbnails.map((image, index) => (
             <div
               key={index}
-              className="aspect-square overflow-hidden rounded-lg border-gray-600 bg-gray-800 transition-all duration-200 hover:scale-105 hover:border-gray-400 lg:min-w-[190px]"
+              className="aspect-square overflow-hidden rounded-lg border-gray-600 bg-gray-800 transition-all duration-200 hover:border-gray-400 lg:min-w-[190px]"
             >
               <img
                 src={image}

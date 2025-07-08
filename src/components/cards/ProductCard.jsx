@@ -9,10 +9,9 @@ const ProductCard = ({
   showQuickView = true,
   showWishlist = true,
   showRating = true,
+  product,
   className = '',
 }) => {
-  const [selectedColorIndex, setSelectedColorIndex] = useState(0);
-
   const router = useRouter();
   const handleClick = () => {
     router.push('/product-detail');
@@ -21,6 +20,8 @@ const ProductCard = ({
   const {
     activeTab,
     heroItems,
+    selectedColorIndex,
+    setSelectedColorIndex,
     isRevealed,
     promoSections,
     categoryItems,
@@ -32,7 +33,6 @@ const ProductCard = ({
     isCartOpen,
     isMenuOpen,
     isWishlisted,
-    product,
     quantity,
     relatedProducts,
     selectedColor,
@@ -57,7 +57,7 @@ const ProductCard = ({
 
   return (
     <div
-      className={`group border border-neutral-300/10 hover-lift relative max-w-[300px] overflow-hidden rounded-lg bg-gray-800 transition-all duration-300 md:max-h-fit md:max-w-[300px] ${className}`}
+      className={`group hover-lift relative max-w-[300px] overflow-hidden rounded-lg border border-neutral-300/10 bg-gray-800 transition-all duration-300 md:max-h-fit md:max-w-[300px] ${className}`}
     >
       {/* Product Image */}
       <div className="relative aspect-square w-full overflow-hidden md:h-fit md:w-full">

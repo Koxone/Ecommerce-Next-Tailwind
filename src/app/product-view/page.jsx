@@ -1,13 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { FilterIcon, GridIcon, ListIcon } from '../../components/Icons';
+import { FilterIcon } from '../../components/Icons';
 import ProductCard from '../../components/cards/ProductCard';
 import productsData from '@/data/products/productsData';
 
 const ProductsView = () => {
-  const [viewMode, setViewMode] = useState('grid');
-  const [showFilters, setShowFilters] = useState(false);
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [sortBy, setSortBy] = useState('featured');
 
@@ -46,10 +44,7 @@ const ProductsView = () => {
         {/* Filters and controls */}
         <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-2">
-            <button
-              onClick={() => setShowFilters(!showFilters)}
-              className="flex items-center gap-2 rounded-lg bg-gray-800 px-4 py-2 transition hover:bg-gray-700"
-            >
+            <button className="flex items-center gap-2 rounded-lg bg-gray-800 px-4 py-2 transition hover:bg-gray-700 md:hidden">
               <FilterIcon size={18} />
               <span>Filters</span>
             </button>
@@ -57,7 +52,7 @@ const ProductsView = () => {
               <button
                 key={cat}
                 onClick={() => setCategoryFilter(cat)}
-                className={`font-poppins rounded-lg px-4 py-2 transition ${
+                className={`font-poppins cursor-pointer rounded-lg px-4 py-2 transition ${
                   categoryFilter === cat
                     ? 'bg-white text-gray-900'
                     : 'bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white'
@@ -80,29 +75,6 @@ const ProductsView = () => {
               <option value="price-high">Price: High to Low</option>
               <option value="rating">Highest Rated</option>
             </select>
-
-            <div className="flex rounded-lg bg-gray-800">
-              <button
-                onClick={() => setViewMode('grid')}
-                className={`rounded p-2 ${
-                  viewMode === 'grid'
-                    ? 'bg-white text-gray-900'
-                    : 'text-gray-400 hover:text-white'
-                }`}
-              >
-                <GridIcon size={18} />
-              </button>
-              <button
-                onClick={() => setViewMode('list')}
-                className={`rounded p-2 ${
-                  viewMode === 'list'
-                    ? 'bg-white text-gray-900'
-                    : 'text-gray-400 hover:text-white'
-                }`}
-              >
-                <ListIcon size={18} />
-              </button>
-            </div>
           </div>
         </div>
 
@@ -111,19 +83,9 @@ const ProductsView = () => {
         </p>
 
         {/* Products grid */}
-        <div
-          className={`grid gap-6 ${
-            viewMode === 'grid'
-              ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
-              : 'grid-cols-1'
-          }`}
-        >
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {sortedProducts.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              viewMode={viewMode}
-            />
+            <ProductCard key={product.id} product={product} />
           ))}
         </div>
       </div>

@@ -30,6 +30,7 @@ export function MainContextProvider({ children }) {
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState('women');
   const [isWishlisted, setIsWishlisted] = useState(false);
+  const [selectedColorIndex, setSelectedColorIndex] = useState(0);
 
   const heroItems = [
     <div
@@ -261,6 +262,10 @@ export function MainContextProvider({ children }) {
     <MainContext.Provider
       value={{
         activeTab,
+        selectedColor,
+        setSelectedColor,
+        selectedColorIndex,
+        setSelectedColorIndex,
         isLoggedIn,
         setIsLoggedIn,
         heroItems,

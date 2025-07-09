@@ -1,8 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { HeartIcon, StarIcon } from '../Icons';
-import { useMainContext } from '@/context/MainContext';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
@@ -13,13 +12,19 @@ const ProductCard = ({
   product,
   className = '',
 }) => {
-  const { isWishlisted, setIsWishlisted, selectedColor } = useMainContext();
-
   const [localColorIndex, setLocalColorIndex] = useState(0);
   const router = useRouter();
 
-  const handleWishlistToggle = () => {
-    setIsWishlisted(!isWishlisted);
+  // Wishlist Handler
+  const [isWishlisted, setIsWishlisted] = useState(() => {
+    const savedWishlist = localStorage.getItem(`wishlist-${product.id}`);
+    return savedWishlist === 'true';
+  });
+  const handleWishlistToggle = (e) => {
+    e.stopPropagation();
+    const newIsWishlisted = !isWishlisted;
+    setIsWishlisted(newIsWishlisted);
+    localStorage.setItem(`wishlist-${product.id}`, newIsWishlisted.toString());
   };
 
   const handleColorSelect = (index) => {
@@ -34,9 +39,13 @@ const ProductCard = ({
   const productImages = product.images?.[currentColorName];
   const displayImage = productImages ? productImages[0] : product.image;
 
+  const discountedPrice = product.discount
+    ? (product.price * (1 - product.discount / 100)).toFixed(2)
+    : product.price.toFixed(2);
+
   return (
     <div
-      className={`group hover-lift relative max-w-[300px] cursor-pointer overflow-hidden rounded-lg border border-neutral-300/10 bg-gray-800 transition-all duration-300 ${className}`}
+      className={`group hover-lift relative max-w-[300px] overflow-hidden rounded-lg border border-neutral-300/10 bg-gray-800 transition-all duration-300 ${className}`}
     >
       {/* Product Image */}
       <div className="relative aspect-square w-full overflow-hidden">
@@ -46,7 +55,7 @@ const ProductCard = ({
           alt={product.name}
           width={500}
           height={500}
-          className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full cursor-pointer object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, 500px"
         />
 
@@ -93,14 +102,14 @@ const ProductCard = ({
 
       {/* Bottom Product Info */}
       <div className="p-4">
-        {/* Color Options */}
+        {/* Colors Preview Buttons */}
         {product.colors && product.colors.length > 0 && (
           <div className="mb-3 flex gap-2">
             {product.colors.map((color, index) => (
               <button
                 key={index}
                 onClick={() => handleColorSelect(index)}
-                className={`hover-scale focus-ring h-6 w-6 rounded-full border-2 transition-all duration-200 ${
+                className={`hover-scale focus-ring h-6 w-6 cursor-pointer rounded-full border-2 transition-all duration-200 ${
                   localColorIndex === index
                     ? 'border-white'
                     : 'border-gray-600 hover:border-gray-400'
@@ -111,7 +120,7 @@ const ProductCard = ({
           </div>
         )}
 
-        {/* Product Name */}
+        {/* Product Title */}
         <h3 className="font-montserrat mb-1 text-lg font-semibold text-white transition-colors duration-200 group-hover:text-gray-300">
           {product.name}
         </h3>
@@ -123,14 +132,14 @@ const ProductCard = ({
           </p>
         )}
 
-        {/* Product Color/Variant */}
+        {/* Product Color Name */}
         {product.colors && product.colors.length > 0 && (
           <p className="font-inter mb-2 text-sm text-gray-500">
             {product.colors[localColorIndex]?.name}
           </p>
         )}
 
-        {/* Rating */}
+        {/* Product Rating */}
         {showRating && product.rating && (
           <div className="mb-2 flex items-center gap-1">
             {[...Array(5)].map((_, i) => (
@@ -147,19 +156,19 @@ const ProductCard = ({
           </div>
         )}
 
-        {/* Price */}
+        {/* Product Price */}
         <div className="flex items-center gap-2">
           <span className="font-poppins text-lg font-bold text-white">
-            ${product.price}
+            ${discountedPrice}
           </span>
-          {product.originalPrice && product.originalPrice > product.price && (
+          {product.discount > 0 && (
             <span className="font-poppins text-sm text-gray-500 line-through">
-              ${product.originalPrice}
+              ${product.price.toFixed(2)}
             </span>
           )}
         </div>
 
-        {/* Size Options */}
+        {/* Product Sizes */}
         {product.sizes && product.sizes.length > 0 && (
           <div className="mt-3 flex gap-2">
             {product.sizes.map((size, index) => (

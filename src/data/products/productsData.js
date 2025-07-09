@@ -35,6 +35,7 @@ const productsData = [
     reviewCount: 128,
     isNew: false,
     isSale: false,
+    discount: false,
     gender: 'women',
     categorie: 'bras',
   },
@@ -86,6 +87,8 @@ const productsData = [
     reviewCount: 128,
     isNew: false,
     isSale: true,
+
+    discount: 10,
     gender: 'men',
     categorie: 'shirts',
   },
@@ -136,11 +139,12 @@ const productsData = [
     reviewCount: 128,
     isNew: true,
     isSale: false,
+    discount: false,
     gender: 'men',
     categorie: 'joggers',
   },
   {
-    id: 6,
+    id: 5,
     name: 'Apex Vault Short',
     cardText:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad consectetur eos minus ducimus ipsum blanditiis provident repellendus eius quisquam doloremque.',
@@ -186,11 +190,12 @@ const productsData = [
     reviewCount: 128,
     isNew: false,
     isSale: false,
+    discount: false,
     gender: 'men',
     categorie: 'shorts',
   },
   {
-    id: 5,
+    id: 6,
     name: 'Aeroflex Tank',
     cardText:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad consectetur eos minus ducimus ipsum blanditiis provident repellendus eius quisquam doloremque.',
@@ -245,11 +250,12 @@ const productsData = [
     reviewCount: 128,
     isNew: false,
     isSale: false,
+    discount: false,
     gender: 'men',
     categorie: 'tanktop',
   },
   {
-    id: 6,
+    id: 7,
     name: 'Lina Bodysuit',
     cardText:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad consectetur eos minus ducimus ipsum blanditiis provident repellendus eius quisquam doloremque.',
@@ -304,11 +310,12 @@ const productsData = [
     reviewCount: 128,
     isNew: true,
     isSale: false,
+    discount: false,
     gender: 'women',
     categorie: 'bodysuit',
   },
   {
-    id: 7,
+    id: 8,
     name: 'Pump Short',
     cardText:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad consectetur eos minus ducimus ipsum blanditiis provident repellendus eius quisquam doloremque.',
@@ -372,11 +379,12 @@ const productsData = [
     reviewCount: 128,
     isNew: false,
     isSale: false,
+    discount: false,
     gender: 'women',
     categorie: 'shorts',
   },
   {
-    id: 8,
+    id: 9,
     name: 'Dip Back Legging',
     cardText:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad consectetur eos minus ducimus ipsum blanditiis provident repellendus eius quisquam doloremque.',
@@ -385,7 +393,6 @@ const productsData = [
     about:
       'Fit suggestion This bra fits true to size for A/B/C cups and is ideal for low-impact activities. We suggest sizing up. Brittney is 5’2”/157.5cm, wearing a size S with 33.5\"/85cm bust. Materials and washing directions 51% Polyamide, 38% Polyester, 11% Elastane We recommend washing inside-out on a cold setting with like colors Hang to dry',
     color: 'Acai Berry',
-    price: 48,
     images: {
       Black: [
         '/products/Women/Leggins/DipBackLegging/Women-Leggins-1-black.jpg',
@@ -438,13 +445,15 @@ const productsData = [
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     rating: 4.5,
     reviewCount: 128,
-    isNew: false,
-    isSale: false,
+    isNew: true,
+    isSale: true,
+    price: 48,
+    discount: 10,
     gender: 'women',
     categorie: 'leggins',
   },
   {
-    id: 9,
+    id: 10,
     name: 'Shape Jacket',
     cardText:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad consectetur eos minus ducimus ipsum blanditiis provident repellendus eius quisquam doloremque.',
@@ -508,6 +517,7 @@ const productsData = [
     reviewCount: 128,
     isNew: false,
     isSale: false,
+    discount: false,
     gender: 'women',
     categorie: 'hoodies&jackets',
   },

@@ -521,6 +521,44 @@ const productsData = [
     gender: 'women',
     categorie: 'hoodies&jackets',
   },
+  {
+    id: 11,
+    name: 'Core Crossbody',
+    cardText:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad consectetur eos minus ducimus ipsum blanditiis provident repellendus eius quisquam doloremque.',
+    description:
+      'Highlights This bra is a tight fit Adjustable straps Designed for low-impact activity The suggested cup size is A/B/C Must size up Description The new Sandy Bra features a perfect triangle-cut shape with an open, minimal back and adjustable straps. Added hooks on the back let you wear the straps straight or crossed for a customized fit. This bra fits true to size for A/B/C cups and is ideal for low-impact activities. If you have a larger cup size, we suggest sizing up. Crafted from our signature Amplify fabric, it delivers an irresistibly silky, smooth hand feel, while the full-interlocking knit offers flexibility to move freely.',
+    about:
+      'Fit suggestion This bra fits true to size for A/B/C cups and is ideal for low-impact activities. We suggest sizing up. Brittney is 5’2”/157.5cm, wearing a size S with 33.5\"/85cm bust. Materials and washing directions 51% Polyamide, 38% Polyester, 11% Elastane We recommend washing inside-out on a cold setting with like colors Hang to dry',
+    color: 'Acai Berry',
+    price: 48,
+    images: {
+      White: [
+        '/products/Accesories/bags/Accesories-bags-1-white.jpg',
+        '/products/Accesories/bags/Accesories-bags-2-white.jpg',
+        '/products/Accesories/bags/Accesories-bags-3-white.jpg',
+        '/products/Accesories/bags/Accesories-bags-4-white.jpg',
+      ],
+      Black: [
+        '/products/Accesories/bags/Accesories-bags-1-black.jpg',
+        '/products/Accesories/bags/Accesories-bags-2-black.jpg',
+        '/products/Accesories/bags/Accesories-bags-3-black.jpg',
+        '/products/Accesories/bags/Accesories-bags-4-black.jpg',
+      ],
+    },
+    colors: [
+      { name: 'White', value: '#ffffff ' },
+      { name: 'Black', value: '#000000 ' },
+    ],
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    rating: 4.5,
+    reviewCount: 128,
+    isNew: false,
+    isSale: false,
+    discount: false,
+    gender: 'men',
+    categorie: 'bags',
+  },
 ];
 
 export default productsData;

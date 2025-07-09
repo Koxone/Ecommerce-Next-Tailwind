@@ -58,7 +58,7 @@ const ProductGrid = ({
 
   const displayProducts = products.length > 0 ? products : defaultProducts;
   const filteredProducts = showTabs
-    ? displayProducts.filter((product) => product.category === activeTab)
+    ? displayProducts.filter((product) => product.gender === activeTab)
     : displayProducts;
 
   const sortedProducts = [...filteredProducts].sort((a, b) => {
@@ -82,7 +82,7 @@ const ProductGrid = ({
         pathname === '/' ? 'py-16' : 'py-1'
       }`}
     >
-      <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 sm:px-0  lg:px-">
+      <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 sm:px-0">
         {/* Section Header */}
         <div className="flex flex-col items-start">
           <div className="animate-fade-in text-left">
@@ -127,7 +127,7 @@ const ProductGrid = ({
         <div
           className={`animate-fade-in gap-6 ${
             viewMode === 'grid'
-              ? 'flex snap-x snap-mandatory overflow-x-auto xl:grid xl:grid-cols-4'
+              ? 'flex w-full snap-x snap-mandatory overflow-x-auto'
               : 'grid grid-cols-1'
           }`}
         >

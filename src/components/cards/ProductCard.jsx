@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { HeartIcon, StarIcon } from '../Icons';
 import { useMainContext } from '@/context/MainContext';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 const ProductCard = ({
   showQuickView = true,
@@ -39,10 +40,13 @@ const ProductCard = ({
     >
       {/* Product Image */}
       <div className="relative aspect-square w-full overflow-hidden">
-        <img
+        <Image
           src={displayImage}
           alt={product.name}
+          width={500}
+          height={500}
           className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          sizes="(max-width: 768px) 100vw, 500px"
         />
 
         {/* Badges */}

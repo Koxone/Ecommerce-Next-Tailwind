@@ -56,12 +56,12 @@ export default function HomePage() {
         </ScrollReveal>
         {/* Categories Sections */}
         <ScrollReveal>
-          <PromoSectionContainer type="categories" />
+          <PromoSectionContainer title="Categorias" subtitle="podria interesarte" type="categories" />
         </ScrollReveal>
 
         {/* Promotional Sections */}
         <ScrollReveal>
-          <PromoSectionContainer type="promos" />
+          <PromoSectionContainer title="Buscas algo mas?" subtitle="podria interesarte" type="promos" />
         </ScrollReveal>
       </div>
 

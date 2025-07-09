@@ -1,5 +1,3 @@
-// CategoriesContainer.jsx
-// Sin librerías externas, React + Tailwind, listo para Vite
 'use client';
 
 import React from 'react';
@@ -35,7 +33,7 @@ export default function CategoriesContainer({ title }) {
       </div>
 
       {/* Horizontal Scroll Container */}
-      <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 px-5 md:px-0">
+      <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 md:px-0">
         {categories.map((cat, idx) => (
           <div
             key={idx}

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { FilterIcon } from '../../components/Icons';
 import ProductCard from '../../components/cards/ProductCard';
 import productsData from '@/data/products/productsData';
+import FiltersSidebar from '@/components/nav/FiltersSidebar';
 
 const ProductsView = () => {
   const [categoryFilter, setCategoryFilter] = useState('all');
@@ -32,7 +33,8 @@ const ProductsView = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gray-900 px-4 py-8 text-white sm:px-6 lg:px-8">
+    <div className="grid grid-cols-[auto_1fr] gap-4 min-h-screen bg-gray-900 px-4 py-8 text-white sm:px-6 lg:px-8">
+      <FiltersSidebar />
       <div className="mx-auto max-w-7xl">
         <h1 className="font-montserrat mb-2 text-3xl font-bold">
           All Products

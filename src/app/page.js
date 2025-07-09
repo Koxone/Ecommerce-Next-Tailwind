@@ -5,7 +5,6 @@ import PromoSectionContainer from '@/components/containers/PromoSectionContainer
 import NewsLetter from '@/components/newsletter/NewsLetter';
 import ProductGrid from '@/components/ProductGrid';
 import { useMainContext } from '@/context/MainContext';
-import ScrollReveal from '@/utils/ScrollReveal';
 
 export default function HomePage() {
   const {
@@ -35,7 +34,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gray-900">
       {/* Hero Carousel Component */}
-      <ScrollReveal>
+      <div>
         <Carousel
           items={heroItems}
           autoPlay={true}
@@ -43,27 +42,35 @@ export default function HomePage() {
           showDots={true}
           showArrows={true}
         />
-      </ScrollReveal>
+      </div>
 
       <div className="flex w-full max-w-7xl flex-col gap-6 justify-self-center md:px-10">
         {/* ProductGrid - SHOP DROP 3 */}
-        <ScrollReveal>
+        <div>
           <ProductGrid />
-        </ScrollReveal>
+        </div>
         {/* Categories Sections */}
-        <ScrollReveal>
-          <PromoSectionContainer title="Categorias" subtitle="podria interesarte" type="categories" />
-        </ScrollReveal>
+        <div>
+          <PromoSectionContainer
+            title="Categorias"
+            subtitle="podria interesarte"
+            type="categories"
+          />
+        </div>
 
         {/* Promotional Sections */}
-        <ScrollReveal>
-          <PromoSectionContainer title="Buscas algo mas?" subtitle="podria interesarte" type="promos" />
-        </ScrollReveal>
+        <div>
+          <PromoSectionContainer
+            title="Buscas algo mas?"
+            subtitle="podria interesarte"
+            type="promos"
+          />
+        </div>
       </div>
 
-      <ScrollReveal>
+      <div>
         <NewsLetter />
-      </ScrollReveal>
+      </div>
     </div>
   );
 }

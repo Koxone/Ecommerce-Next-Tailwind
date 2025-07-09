@@ -112,9 +112,9 @@ const Header = () => {
 
           {/* Right Icons */}
           <div className="flex items-center justify-end space-x-4">
-            <button className="cursor-pointer p-2 text-gray-300 hover:text-white">
+            {/* <button className="cursor-pointer p-2 text-gray-300 hover:text-white">
               <SearchIcon size={20} />
-            </button>
+            </button> */}
             <button
               onClick={handleClick}
               className="cursor-pointer p-2 text-gray-300 hover:text-white"

@@ -4,6 +4,7 @@ import Carousel from '@/components/carousels/Carousel';
 import PromoSectionContainer from '@/components/containers/PromoSectionContainer';
 import NewsLetter from '@/components/newsletter/NewsLetter';
 import ProductGrid from '@/components/ProductGrid';
+import ProductList from '@/components/ProductList';
 import { useMainContext } from '@/context/MainContext';
 
 export default function HomePage() {
@@ -34,6 +35,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gray-900">
       {/* Hero Carousel Component */}
+      {/* <ProductList /> */}
       <div>
         <Carousel
           items={heroItems}

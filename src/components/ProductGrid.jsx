@@ -74,7 +74,7 @@ const ProductGrid = ({
 
   return (
     <section
-      className={`animate-fade-in bg-gray-900 ${
+      className={`animate-fade-in border border-white bg-gray-900 ${
         pathname === '/' ? 'pt-16' : 'py-1'
       }`}
     >

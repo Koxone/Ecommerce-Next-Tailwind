@@ -25,7 +25,7 @@ export function MainContextProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Filter Handler
-  const [activeTab, setActiveTab] = useState('all');
+  const [activeTab, setActiveTab] = useState('women');
   const [showSaleOnly, setShowSaleOnly] = useState(false);
   const [showNewOnly, setShowNewOnly] = useState(false);
   const [minPrice, setMinPrice] = useState(0);

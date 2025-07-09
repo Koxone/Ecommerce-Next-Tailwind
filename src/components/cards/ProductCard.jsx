@@ -16,12 +16,15 @@ const ProductCard = ({
   const router = useRouter();
 
   // Wishlist Handler
-const [isWishlisted, setIsWishlisted] = useState(false);
+  const [isWishlisted, setIsWishlisted] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => setIsHovered(false);
 
-useEffect(() => {
-  const savedWishlist = localStorage.getItem(`wishlist-${product.id}`);
-  setIsWishlisted(savedWishlist === 'true');
-}, [product.id]);
+  useEffect(() => {
+    const savedWishlist = localStorage.getItem(`wishlist-${product.id}`);
+    setIsWishlisted(savedWishlist === 'true');
+  }, [product.id]);
   const handleWishlistToggle = (e) => {
     e.stopPropagation();
     const newIsWishlisted = !isWishlisted;
@@ -39,7 +42,11 @@ useEffect(() => {
 
   const currentColorName = product.colors?.[localColorIndex]?.name;
   const productImages = product.images?.[currentColorName];
-  const displayImage = productImages ? productImages[0] : product.image;
+  const displayImage = productImages
+    ? isHovered
+      ? productImages[1] || productImages[0] 
+      : productImages[0]
+    : product.image;
 
   const discountedPrice = product.discount
     ? (product.price * (1 - product.discount / 100)).toFixed(2)
@@ -50,7 +57,11 @@ useEffect(() => {
       className={`group hover-lift relative max-w-[300px] overflow-hidden rounded-lg border border-neutral-300/10 bg-gray-800 transition-all duration-300 ${className}`}
     >
       {/* Product Image */}
-      <div className="relative aspect-square w-full overflow-hidden">
+      <div
+        className="relative aspect-square w-full overflow-hidden"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
         <Image
           onClick={handleClick}
           src={displayImage}

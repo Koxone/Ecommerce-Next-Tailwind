@@ -300,7 +300,7 @@ const productsData = [
       { name: 'Purple', value: '#800080' },
     ],
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
-    rating: 4.5,
+    rating: 4.9,
     reviewCount: 128,
     isNew: true,
     isSale: false,

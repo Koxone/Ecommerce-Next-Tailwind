@@ -25,13 +25,13 @@ export function MainContextProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Filter Handler
-  const [activeTab, setActiveTab] = useState('women'); // para women, men, all
-  const [showSaleOnly, setShowSaleOnly] = useState(false); // para isSale
-  const [showNewOnly, setShowNewOnly] = useState(false); // para isNew
+  const [activeTab, setActiveTab] = useState('women'); 
+  const [showSaleOnly, setShowSaleOnly] = useState(false);
+  const [showNewOnly, setShowNewOnly] = useState(false); 
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(Infinity);
   const [minRating, setMinRating] = useState(0);
-  const [sortBy, setSortBy] = useState('featured'); // sorting dinámico
+  const [sortBy, setSortBy] = useState('featured'); 
   const filteredProducts = productsData.filter((product) => {
     if (activeTab !== 'all' && product.gender !== activeTab) return false;
     if (showSaleOnly && !product.isSale) return false;

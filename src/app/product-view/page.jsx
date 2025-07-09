@@ -32,7 +32,7 @@ export default function ProductsView() {
               className={`font-poppins cursor-pointer rounded-md px-6 py-2 font-medium transition-all duration-200 ${
                 activeTab === 'all'
                   ? 'bg-white text-gray-900'
-                  : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                  : 'text-gray-300 border hover:bg-gray-700 hover:text-white'
               }`}
             >
               Todos
@@ -44,7 +44,7 @@ export default function ProductsView() {
                 className={`font-poppins cursor-pointer rounded-md px-6 py-2 font-medium transition-all duration-200 ${
                   activeTab === tab
                     ? 'bg-white text-gray-900'
-                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                    : 'text-gray-300 border hover:bg-gray-700 hover:text-white'
                 }`}
               >
                 {tab === 'women' ? 'Mujeres' : 'Hombres'}

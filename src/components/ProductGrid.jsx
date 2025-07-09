@@ -5,6 +5,7 @@ import ProductCard from './cards/ProductCard';
 import { useMainContext } from '@/context/MainContext';
 import productsData from '@/data/products/productsData';
 import { usePathname, useRouter } from 'next/navigation';
+import ProductFilters from '@/components/filters/ProductFilters';
 
 const ProductGrid = ({
   title = 'SHOP DROP 1',
@@ -15,46 +16,21 @@ const ProductGrid = ({
   className = '',
 }) => {
   const [viewMode, setViewMode] = useState('grid');
-  const [sortBy, setSortBy] = useState('featured');
-
   const pathname = usePathname();
-
   const router = useRouter();
 
   const handleClick = () => {
     router.push('/product-view');
   };
 
-  const {
-    activeTab,
-    heroItems,
-    isRevealed,
-    setIsRevealed,
-    carouselItems,
-    currentPage,
-    handleQuantityChange,
-    headerButtons,
-    isCartOpen,
-    isMenuOpen,
-    isWishlisted,
-    quantity,
-    selectedColor,
-    selectedSize,
-    setActiveTab,
-    setCurrentPage,
-    setIsCartOpen,
-    setIsMenuOpen,
-    setIsWishlisted,
-    setQuantity,
-    setSelectedColor,
-    setSelectedSize,
-  } = useMainContext();
+  const { activeTab, setActiveTab, sortBy, setSortBy } = useMainContext();
 
   const defaultProducts = productsData;
-
   const displayProducts = products.length > 0 ? products : defaultProducts;
   const filteredProducts = showTabs
-    ? displayProducts.filter((product) => product.gender === activeTab)
+    ? activeTab === 'all'
+      ? displayProducts
+      : displayProducts.filter((product) => product.gender === activeTab)
     : displayProducts;
 
   const sortedProducts = [...filteredProducts].sort((a, b) => {
@@ -64,7 +40,7 @@ const ProductGrid = ({
       case 'price-high':
         return b.price - a.price;
       case 'newest':
-        return b.isNew - a.isNew;
+        return Number(b.isNew) - Number(a.isNew);
       case 'rating':
         return (b.rating || 0) - (a.rating || 0);
       default:
@@ -90,30 +66,15 @@ const ProductGrid = ({
             </h2>
           </div>
 
-          {/* Tabs */}
-          <div className="animate-slide-in-left flex justify-center">
-            <div className="inline-flex gap-4 rounded-lg bg-gray-800 p-1">
-              <button
-                onClick={() => setActiveTab('women')}
-                className={`font-poppins cursor-pointer rounded-md px-6 py-2 font-medium transition-all duration-200 ${
-                  activeTab === 'women'
-                    ? 'bg-white text-gray-900'
-                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                }`}
-              >
-                Mujeres
-              </button>
-              <button
-                onClick={() => setActiveTab('men')}
-                className={`font-poppins cursor-pointer rounded-md px-6 py-2 font-medium transition-all duration-200 ${
-                  activeTab === 'men'
-                    ? 'bg-white text-gray-900'
-                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                }`}
-              >
-                Hombres
-              </button>
-            </div>
+          {/* Section Filters */}
+          <div className="animate-slide-in-left w-full">
+            <ProductFilters
+              activeCategory={activeTab}
+              setActiveCategory={setActiveTab}
+              sortBy={sortBy}
+              setSortBy={setSortBy}
+              categories={['women', 'men']}
+            />
           </div>
         </div>
 

@@ -1,31 +1,37 @@
-'use client';
+// useFilteredProducts.js
+import { useState, useMemo } from 'react';
 
-import { useState, useEffect } from 'react';
-import productsData from '@/data/products/productsData';
-
-export default function useFilteredProducts() {
-  const [activeTab, setActiveTab] = useState('women'); // 'women', 'men', 'all'
+export default function useFilteredProducts(productsData) {
+  const [activeCategory, setActiveCategory] = useState('all');
   const [showSaleOnly, setShowSaleOnly] = useState(false);
   const [showNewOnly, setShowNewOnly] = useState(false);
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(Infinity);
   const [minRating, setMinRating] = useState(0);
-  const [sortBy, setSortBy] = useState('featured'); // 'featured', 'price-low', etc.
+  const [sortBy, setSortBy] = useState('featured');
 
-  const [filteredAndSortedProducts, setFilteredAndSortedProducts] =
-    useState(productsData);
-
-  useEffect(() => {
-    const filtered = productsData.filter((product) => {
-      if (activeTab !== 'all' && product.gender !== activeTab) return false;
+  const filteredProducts = useMemo(() => {
+    return productsData.filter((product) => {
+      if (activeCategory !== 'all' && product.categorie !== activeCategory)
+        return false;
       if (showSaleOnly && !product.isSale) return false;
       if (showNewOnly && !product.isNew) return false;
       if (product.price < minPrice || product.price > maxPrice) return false;
       if (product.rating < minRating) return false;
       return true;
     });
+  }, [
+    productsData,
+    activeCategory,
+    showSaleOnly,
+    showNewOnly,
+    minPrice,
+    maxPrice,
+    minRating,
+  ]);
 
-    const sorted = [...filtered].sort((a, b) => {
+  const sortedProducts = useMemo(() => {
+    return [...filteredProducts].sort((a, b) => {
       switch (sortBy) {
         case 'price-low':
           return a.price - b.price;
@@ -39,35 +45,16 @@ export default function useFilteredProducts() {
           return 0;
       }
     });
-
-    setFilteredAndSortedProducts(sorted);
-  }, [
-    activeTab,
-    showSaleOnly,
-    showNewOnly,
-    minPrice,
-    maxPrice,
-    minRating,
-    sortBy,
-  ]);
+  }, [filteredProducts, sortBy]);
 
   return {
-    filteredAndSortedProducts,
-
-    // Filters & Sorting States
-    activeTab,
-    setActiveTab,
-    showSaleOnly,
+    products: sortedProducts,
+    setActiveCategory,
     setShowSaleOnly,
-    showNewOnly,
     setShowNewOnly,
-    minPrice,
     setMinPrice,
-    maxPrice,
     setMaxPrice,
-    minRating,
     setMinRating,
-    sortBy,
     setSortBy,
   };
 }

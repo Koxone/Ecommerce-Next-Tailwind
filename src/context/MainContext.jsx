@@ -14,6 +14,7 @@ export function MainContextProvider({ children }) {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isRevealed, setIsRevealed] = useState(false);
   const headerButtons = [
+    { text: 'ALL', value: 'all' },
     { text: 'MUJER', value: 'women' },
     { text: 'HOMBRE', value: 'men' },
     { text: 'ACCESORIOS', value: 'accessories' },
@@ -25,7 +26,7 @@ export function MainContextProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Filter Handler
-  const [activeTab, setActiveTab] = useState('men');
+  const [activeTab, setActiveTab] = useState('all');
   const [showSaleOnly, setShowSaleOnly] = useState(false);
   const [showNewOnly, setShowNewOnly] = useState(false);
   const [minPrice, setMinPrice] = useState(0);

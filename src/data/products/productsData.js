@@ -102,7 +102,6 @@ const productsData = [
     about:
       'Fit suggestion This bra fits true to size for A/B/C cups and is ideal for low-impact activities. We suggest sizing up. Brittney is 5’2”/157.5cm, wearing a size S with 33.5\"/85cm bust. Materials and washing directions 51% Polyamide, 38% Polyester, 11% Elastane We recommend washing inside-out on a cold setting with like colors Hang to dry',
     color: 'Acai Berry',
-    price: 48,
     images: {
       White: [
         '/products/Men/Joggers/ShiftJogger/men-jogger-1-white.jpg',
@@ -137,6 +136,7 @@ const productsData = [
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     rating: 4.5,
     reviewCount: 128,
+    price: 48,
     isNew: true,
     isSale: false,
     discount: false,

@@ -64,6 +64,11 @@ function ProductDetail({ params }) {
 
   const thumbnails = product.images[currentColorName] || [];
 
+  // Calculate price with discount
+  const discountedPrice = product.discount
+    ? (product.price * (1 - product.discount / 100)).toFixed(2)
+    : product.price.toFixed(2);
+
   return (
     <div className="grid w-full max-w-[1200px] grid-cols-1 gap-12 self-center p-8 md:grid-cols-[1fr_1fr] md:p-10">
       {/* Product Images */}
@@ -128,18 +133,20 @@ function ProductDetail({ params }) {
         {/* Price */}
         <div className="mb-6 flex items-center gap-3">
           <span className="text-2xl font-bold text-white md:text-3xl">
-            ${product.price}
+            ${discountedPrice}
           </span>
-          {product.originalPrice && (
-            <>
-              <span className="text-lg text-gray-500 line-through">
-                ${product.originalPrice}
-              </span>
-              <span className="rounded bg-red-500 px-2 py-0.5 text-xs font-semibold text-white">
-                Save ${product.originalPrice - product.price}
-              </span>
-            </>
-          )}
+          {product.discount &&
+            product.discount !== false &&
+            product.price !== discountedPrice && (
+              <>
+                <span className="text-lg text-gray-500 line-through">
+                  ${product.price.toFixed(2)}
+                </span>
+                <span className="rounded bg-red-500 px-2 py-0.5 text-xs font-semibold text-white">
+                  Save ${(product.price - discountedPrice).toFixed(2)}{' '}
+                </span>
+              </>
+            )}
         </div>
 
         {/* Color Selection */}

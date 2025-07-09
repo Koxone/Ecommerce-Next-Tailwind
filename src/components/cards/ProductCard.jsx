@@ -36,11 +36,12 @@ const ProductCard = ({
 
   return (
     <div
-      className={`group hover-lift relative max-w-[300px] overflow-hidden rounded-lg border border-neutral-300/10 bg-gray-800 transition-all duration-300 ${className}`}
+      className={`group hover-lift relative max-w-[300px] cursor-pointer overflow-hidden rounded-lg border border-neutral-300/10 bg-gray-800 transition-all duration-300 ${className}`}
     >
       {/* Product Image */}
       <div className="relative aspect-square w-full overflow-hidden">
         <Image
+          onClick={handleClick}
           src={displayImage}
           alt={product.name}
           width={500}

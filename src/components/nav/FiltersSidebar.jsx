@@ -1,143 +1,163 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useMainContext } from '@/context/MainContext';
 
 export default function FiltersSidebar() {
-  const [activeTab, setActiveTab] = useState('MUJERES');
-  const [selectedColor, setSelectedColor] = useState(null);
-  const [selectedSize, setSelectedSize] = useState(null);
+  const {
+    activeTab,
+    setActiveTab,
+    showSaleOnly,
+    setShowSaleOnly,
+    showNewOnly,
+    setShowNewOnly,
+    minPrice,
+    setMinPrice,
+    maxPrice,
+    setMaxPrice,
+    minRating,
+    setMinRating,
+    sortBy,
+    setSortBy,
+    selectedSize,
+    setSelectedSize,
+    selectedColor,
+    setSelectedColor,
+  } = useMainContext();
 
-  const tabs = ['MUJERES', 'HOMBRES'];
+  const tabs = ['all', 'women', 'men'];
   const sortOptions = [
-    'Destacados',
-    'Más vendidos',
-    'Novedades',
-    'Precio: Menor a mayor',
-    'Precio: Mayor a menor',
+    { label: 'Destacados', value: 'featured' },
+    { label: 'Novedades', value: 'newest' },
+    { label: 'Precio: Menor a mayor', value: 'price-low' },
+    { label: 'Precio: Mayor a menor', value: 'price-high' },
+    { label: 'Mejor calificados', value: 'rating' },
   ];
-  const genders = ['Hombres (6)', 'Unisex (6)'];
-  const colors = [
-    '#000000',
-    '#5FB7FF',
-    '#B06D6D',
-    '#A3FF9E',
-    '#B1B1B1',
-    '#FF9D47',
-    '#FFB4CF',
-    '#DCBFFF',
-    '#F4F4F4',
-    '#FFF05C',
-  ];
+  const colors = ['#000000', '#5FB7FF', '#B06D6D', '#A3FF9E', '#B1B1B1', '#FF9D47', '#FFB4CF', '#DCBFFF', '#F4F4F4', '#FFF05C'];
   const sizes = ['XXS', 'XS', 'S', 'M', 'L', 'XL', '2XL'];
 
   return (
-    <div className="hidden md:flex">
-      <aside className="sticky top-24 flex max-h-[calc(100vh-6rem)] w-full max-w-[190px] flex-col overflow-hidden xl:max-w-[300px]">
-        {/* Tabs */}
-        <div className="mb-4 flex overflow-hidden rounded-full border border-neutral-700/40">
+    <aside className="sticky top-24 hidden h-[calc(100vh-6rem)] w-full max-w-[200px] flex-col overflow-y-auto pr-4 md:flex">
+      {/* Tabs */}
+      <div className="mb-4">
+        <h3 className="mb-2 text-sm font-semibold text-neutral-300">Categoría</h3>
+        <div className="flex flex-col gap-2">
           {tabs.map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`w-full cursor-pointer py-2 text-sm font-semibold transition-all ${
-                activeTab === tab
-                  ? 'bg-neutral-700 text-white'
-                  : 'text-neutral-400 hover:bg-neutral-800'
+              className={`rounded px-3 py-1 text-left text-sm capitalize transition ${
+                activeTab === tab ? 'bg-neutral-700 text-white' : 'text-neutral-400 hover:bg-neutral-800'
               }`}
             >
-              {tab}
+              {tab === 'all' ? 'Todos' : tab === 'women' ? 'Mujeres' : 'Hombres'}
             </button>
           ))}
         </div>
+      </div>
 
-        {/* Search */}
-        <div className="relative mb-4">
+      {/* Quick Filters */}
+      <div className="mb-4">
+        <h3 className="mb-2 text-sm font-semibold text-neutral-300">Filtros rápidos</h3>
+        <div className="flex flex-col gap-2">
+          <label className="flex items-center gap-2 text-sm text-neutral-400">
+            <input type="checkbox" checked={showSaleOnly} onChange={() => setShowSaleOnly(!showSaleOnly)} className="accent-neutral-600" />
+            En oferta
+          </label>
+          <label className="flex items-center gap-2 text-sm text-neutral-400">
+            <input type="checkbox" checked={showNewOnly} onChange={() => setShowNewOnly(!showNewOnly)} className="accent-neutral-600" />
+            Novedades
+          </label>
+        </div>
+      </div>
+
+      {/* Price */}
+      <div className="mb-4">
+        <h3 className="mb-2 text-sm font-semibold text-neutral-300">Precio</h3>
+        <div className="flex items-center gap-2">
           <input
-            type="text"
-            placeholder="Buscar productos en esta página..."
-            className="w-full rounded border border-neutral-700 bg-transparent p-2 text-sm text-neutral-300 placeholder:text-neutral-500 focus:outline-none"
+            type="number"
+            placeholder="Min"
+            value={minPrice}
+            onChange={(e) => setMinPrice(Number(e.target.value))}
+            className="w-1/2 rounded border border-neutral-600 bg-neutral-800 p-1 text-xs text-neutral-300"
+          />
+          <input
+            type="number"
+            placeholder="Max"
+            value={maxPrice === Infinity ? '' : maxPrice}
+            onChange={(e) => setMaxPrice(e.target.value === '' ? Infinity : Number(e.target.value))}
+            className="w-1/2 rounded border border-neutral-600 bg-neutral-800 p-1 text-xs text-neutral-300"
           />
         </div>
+      </div>
 
-        {/* Sort By */}
-        <div className="mb-4 border-b border-neutral-700 pb-2">
-          <h3 className="mb-2 text-sm font-semibold text-neutral-300">
-            Ordenar por
-          </h3>
-          <div className="flex flex-col gap-1">
-            {sortOptions.map((option) => (
-              <button
-                key={option}
-                className="cursor-pointer text-left text-sm text-neutral-400 hover:text-neutral-200"
-              >
-                {option}
-              </button>
-            ))}
-          </div>
-        </div>
+      {/* Rating */}
+      <div className="mb-4">
+        <h3 className="mb-2 text-sm font-semibold text-neutral-300">Calificación mínima</h3>
+        <input
+          type="range"
+          min={0}
+          max={5}
+          step={0.5}
+          value={minRating}
+          onChange={(e) => setMinRating(Number(e.target.value))}
+          className="w-full accent-neutral-600"
+        />
+        <div className="mt-1 text-xs text-neutral-400">★ {minRating} o más</div>
+      </div>
 
-        {/* Gender */}
-        <div className="mb-4 border-b border-neutral-700 pb-2">
-          <h3 className="mb-2 text-sm font-semibold text-neutral-300">
-            Género
-          </h3>
-          <div className="flex flex-col gap-1">
-            {genders.map((gender) => (
-              <button
-                key={gender}
-                className="cursor-pointer text-left text-sm text-neutral-400 capitalize hover:text-neutral-200"
-              >
-                {gender}
-              </button>
-            ))}
-          </div>
+      {/* Sort */}
+      <div className="mb-4">
+        <h3 className="mb-2 text-sm font-semibold text-neutral-300">Ordenar por</h3>
+        <div className="flex flex-col gap-1">
+          {sortOptions.map((option) => (
+            <button
+              key={option.value}
+              onClick={() => setSortBy(option.value)}
+              className={`rounded px-3 py-1 text-left text-sm transition ${
+                sortBy === option.value ? 'bg-neutral-700 text-white' : 'text-neutral-400 hover:bg-neutral-800'
+              }`}
+            >
+              {option.label}
+            </button>
+          ))}
         </div>
+      </div>
 
-        {/* Colors */}
-        <div className="mb-4 border-b border-neutral-700 pb-2">
-          <h3 className="mb-2 text-sm font-semibold text-neutral-300">
-            Colores
-          </h3>
-          <div className="flex flex-wrap gap-2">
-            {colors.map((color, idx) => (
-              <button
-                key={idx}
-                type="button"
-                onClick={() => setSelectedColor(idx)}
-                className={`h-8 w-8 rounded border transition-colors ${
-                  selectedColor === idx
-                    ? 'border-white ring-2 ring-white'
-                    : 'border-neutral-600'
-                }`}
-                style={{ backgroundColor: color }}
-              ></button>
-            ))}
-          </div>
+      {/* Colors */}
+      <div className="mb-4">
+        <h3 className="mb-2 text-sm font-semibold text-neutral-300">Colores</h3>
+        <div className="flex flex-wrap gap-2">
+          {colors.map((color, idx) => (
+            <button
+              key={idx}
+              onClick={() => setSelectedColor(color)}
+              className={`h-6 w-6 rounded border transition ${
+                selectedColor === color ? 'border-white ring-2 ring-white' : 'border-neutral-600'
+              }`}
+              style={{ backgroundColor: color }}
+            ></button>
+          ))}
         </div>
+      </div>
 
-        {/* Sizes */}
-        <div className="mb-4 border-b border-neutral-700 pb-2">
-          <h3 className="mb-2 text-sm font-semibold text-neutral-300">
-            Tallas
-          </h3>
-          <div className="flex flex-wrap gap-2">
-            {sizes.map((size) => (
-              <button
-                key={size}
-                type="button"
-                onClick={() => setSelectedSize(size)}
-                className={`min-w-[3rem] cursor-pointer rounded border border-neutral-600 px-2 py-1 text-xs text-neutral-300 uppercase transition-colors ${
-                  selectedSize === size
-                    ? 'bg-neutral-700'
-                    : 'hover:bg-neutral-700'
-                }`}
-              >
-                {size}
-              </button>
-            ))}
-          </div>
+      {/* Sizes */}
+      <div>
+        <h3 className="mb-2 text-sm font-semibold text-neutral-300">Tallas</h3>
+        <div className="flex flex-wrap gap-2">
+          {sizes.map((size) => (
+            <button
+              key={size}
+              onClick={() => setSelectedSize(size)}
+              className={`rounded border px-2 py-1 text-xs uppercase transition ${
+                selectedSize === size ? 'border-neutral-500 bg-neutral-700 text-white' : 'border-neutral-600 text-neutral-400 hover:bg-neutral-800'
+              }`}
+            >
+              {size}
+            </button>
+          ))}
         </div>
-      </aside>
-    </div>
+      </div>
+    </aside>
   );
 }

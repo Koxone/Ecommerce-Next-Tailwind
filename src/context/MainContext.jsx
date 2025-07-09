@@ -1,8 +1,8 @@
 'use client';
 
+import productsData from '@/data/products/productsData';
 import { createContext, useContext, useState } from 'react';
 
-// Crear el contexto
 const MainContext = createContext();
 
 export function MainContextProvider({ children }) {
@@ -13,10 +13,6 @@ export function MainContextProvider({ children }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isRevealed, setIsRevealed] = useState(false);
-
-  // Auth Handlers
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   const headerButtons = [
     { text: 'MUJER', value: 'women' },
     { text: 'HOMBRE', value: 'men' },
@@ -25,14 +21,47 @@ export function MainContextProvider({ children }) {
     { text: 'OFERTAS', value: 'sale' },
   ];
 
+  // Auth Handlers
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Filter Handler
+  const [activeTab, setActiveTab] = useState('women'); // para women, men, all
+  const [showSaleOnly, setShowSaleOnly] = useState(false); // para isSale
+  const [showNewOnly, setShowNewOnly] = useState(false); // para isNew
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(Infinity);
+  const [minRating, setMinRating] = useState(0);
+  const [sortBy, setSortBy] = useState('featured'); // sorting dinámico
+  const filteredProducts = productsData.filter((product) => {
+    if (activeTab !== 'all' && product.gender !== activeTab) return false;
+    if (showSaleOnly && !product.isSale) return false;
+    if (showNewOnly && !product.isNew) return false;
+    if (product.price < minPrice || product.price > maxPrice) return false;
+    if (product.rating < minRating) return false;
+    return true;
+  });
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
+    switch (sortBy) {
+      case 'price-low':
+        return a.price - b.price;
+      case 'price-high':
+        return b.price - a.price;
+      case 'newest':
+        return Number(b.isNew) - Number(a.isNew);
+      case 'rating':
+        return b.rating - a.rating;
+      default:
+        return 0;
+    }
+  });
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedColor, setSelectedColor] = useState(0);
   const [quantity, setQuantity] = useState(1);
-  const [activeTab, setActiveTab] = useState('women');
   const [activeTabProduct, setActiveTabProduct] = useState('description');
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [selectedColorIndex, setSelectedColorIndex] = useState(0);
 
+  // Hero Section Handler
   const heroItems = [
     <div
       key="hero1"
@@ -96,83 +125,14 @@ export function MainContextProvider({ children }) {
       </div>
     </div>,
   ];
-
   const product = {
-    id: 1,
-    name: 'Pump Legging',
-    description: "Women's Seamless Legging",
-    fullDescription:
-      'Engineered over two years. Glute-lifting technology that sets a new standard. These leggings feature our revolutionary seamless construction with targeted compression zones for optimal performance and comfort.',
-    color: 'Emerald Green',
-    price: 70,
-    originalPrice: 85,
     images: [
       '/MainBanner.jpg',
       '/MainBanner2.jpg',
       '/MainBanner3.webp',
       '/Muestra.jpg',
     ],
-    colors: [
-      { name: 'Emerald Green', value: '#047857' },
-      { name: 'Charcoal', value: '#1F2937' },
-      { name: 'Purple', value: '#7C3AED' },
-      { name: 'Navy', value: '#1E3A8A' },
-    ],
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
-    rating: 4.7,
-    reviewCount: 203,
-    isNew: true,
-    features: [
-      'Seamless construction',
-      'Glute-lifting technology',
-      'Moisture-wicking fabric',
-      'Four-way stretch',
-      'High-waisted design',
-    ],
-    materials: '78% Nylon, 22% Spandex',
-    care: 'Machine wash cold, hang dry',
   };
-
-  const relatedProducts = [
-    {
-      id: 2,
-      name: 'Sandy Bra',
-      description: "Women's Seamless Scrunch Bra",
-      color: 'Acai Berry',
-      price: 48,
-      image: '/promo1.jpg',
-      colors: ['#8B5CF6', '#1F2937'],
-      rating: 4.5,
-      reviewCount: 128,
-      category: 'women',
-    },
-    {
-      id: 3,
-      name: 'Pump Short',
-      description: "Women's Seamless Short",
-      color: 'Emerald Green',
-      price: 50,
-      image: '/promo2.webp',
-      colors: ['#10B981', '#1F2937'],
-      rating: 4.8,
-      reviewCount: 95,
-      isNew: true,
-      category: 'women',
-    },
-    {
-      id: 4,
-      name: 'Push Tank',
-      description: "Women's 2 in 1 Seamless Tank",
-      color: 'Emerald Green',
-      price: 46,
-      image: '/promo3.webp',
-      colors: ['#059669', '#DC2626'],
-      rating: 4.3,
-      reviewCount: 67,
-      category: 'women',
-    },
-  ];
-
   const carouselItems = product.images.map((image, index) => (
     <div
       key={index}
@@ -193,27 +153,7 @@ export function MainContextProvider({ children }) {
     }
   };
 
-  const promoSections = [
-    {
-      title: 'PARA ELLA',
-      subtitle: 'Ropa que no solo es comoda, se ve bien!',
-      image: '/promo1.jpg',
-      buttonText: 'COMPRA YA',
-    },
-    {
-      title: 'PARA EL',
-      subtitle: 'Sientete seguro en cualquier momento',
-      image: '/promo4.jpg',
-      buttonText: 'COMPRA YA',
-    },
-    {
-      title: 'ACCESORIOS',
-      subtitle: 'No importa la ocasion, lo tenemos!',
-      image: '/promo5.jpg',
-      buttonText: 'COMPRA YA',
-    },
-  ];
-
+  // Promo Section Handler
   const shopData = {
     categories: [
       {
@@ -254,89 +194,63 @@ export function MainContextProvider({ children }) {
     ],
   };
 
-  const categoryItems = [
-    <div
-      key="cat1"
-      className="relative flex h-[50vh] items-center justify-center bg-gradient-to-r from-pink-400 to-pink-600 text-center md:h-[60vh]"
-    >
-      <div className="absolute inset-0 bg-black/30"></div>
-      <div className="relative z-10 px-4">
-        <h2 className="font-montserrat mb-4 text-4xl font-bold tracking-wider text-white md:text-6xl lg:text-8xl">
-          FOR HER
-        </h2>
-        <button className="hover-lift focus-ring font-poppins cursor-pointer rounded-lg bg-white px-6 py-3 font-semibold text-gray-900 transition-all duration-200 hover:bg-gray-100 md:px-8 md:py-4">
-          SHOP WOMEN
-        </button>
-      </div>
-    </div>,
-    <div
-      key="cat2"
-      className="relative flex h-[50vh] items-center justify-center bg-gradient-to-r from-blue-500 to-blue-700 text-center md:h-[60vh]"
-    >
-      <div className="absolute inset-0 bg-black/30"></div>
-      <div className="relative z-10 px-4">
-        <h2 className="font-montserrat mb-4 text-4xl font-bold tracking-wider text-white md:text-6xl lg:text-8xl">
-          FOR HIM
-        </h2>
-        <button className="hover-lift focus-ring font-poppins cursor-pointer rounded-lg bg-white px-6 py-3 font-semibold text-gray-900 transition-all duration-200 hover:bg-gray-100 md:px-8 md:py-4">
-          SHOP MEN
-        </button>
-      </div>
-    </div>,
-    <div
-      key="cat3"
-      className="relative flex h-[50vh] items-center justify-center bg-gradient-to-r from-gray-600 to-gray-800 text-center md:h-[60vh]"
-    >
-      <div className="absolute inset-0 bg-black/30"></div>
-      <div className="relative z-10 px-4">
-        <h2 className="font-montserrat mb-4 text-4xl font-bold tracking-wider text-white md:text-6xl lg:text-8xl">
-          ACCESSORIES
-        </h2>
-        <button className="hover-lift focus-ring font-poppins cursor-pointer rounded-lg bg-white px-6 py-3 font-semibold text-gray-900 transition-all duration-200 hover:bg-gray-100 md:px-8 md:py-4">
-          SHOP ACCESSORIES
-        </button>
-      </div>
-    </div>,
-  ];
-
   return (
     <MainContext.Provider
       value={{
+        // Page & Header
+        currentPage,
+        setCurrentPage,
+        isMenuOpen,
+        setIsMenuOpen,
+        isCartOpen,
+        setIsCartOpen,
+        isRevealed,
+        setIsRevealed,
+        headerButtons,
+
+        // Auth
+        isLoggedIn,
+        setIsLoggedIn,
+
+        // Filters & Sorting
         activeTab,
-        shopData,
-        activeTabProduct,
-        setActiveTabProduct,
+        setActiveTab,
+        showSaleOnly,
+        setShowSaleOnly,
+        showNewOnly,
+        setShowNewOnly,
+        minPrice,
+        setMinPrice,
+        maxPrice,
+        setMaxPrice,
+        minRating,
+        setMinRating,
+        sortBy,
+        setSortBy,
+
+        // Products
+        filteredProducts,
+        sortedProducts,
+
+        // Product Details
+        selectedSize,
+        setSelectedSize,
         selectedColor,
         setSelectedColor,
         selectedColorIndex,
         setSelectedColorIndex,
-        isLoggedIn,
-        setIsLoggedIn,
-        heroItems,
-        isRevealed,
-        promoSections,
-        categoryItems,
-        setIsRevealed,
-        carouselItems,
-        currentPage,
-        handleQuantityChange,
-        headerButtons,
-        isCartOpen,
-        isMenuOpen,
-        isWishlisted,
-        product,
         quantity,
-        relatedProducts,
-        selectedColor,
-        selectedSize,
-        setActiveTab,
-        setCurrentPage,
-        setIsCartOpen,
-        setIsMenuOpen,
-        setIsWishlisted,
         setQuantity,
-        setSelectedColor,
-        setSelectedSize,
+        handleQuantityChange,
+        activeTabProduct,
+        setActiveTabProduct,
+        isWishlisted,
+        setIsWishlisted,
+
+        // UI Data
+        heroItems,
+        carouselItems,
+        shopData,
       }}
     >
       {children}

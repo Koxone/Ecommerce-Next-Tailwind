@@ -29,8 +29,6 @@ const ProductGrid = ({
     activeTab,
     heroItems,
     isRevealed,
-    promoSections,
-    categoryItems,
     setIsRevealed,
     carouselItems,
     currentPage,
@@ -39,9 +37,7 @@ const ProductGrid = ({
     isCartOpen,
     isMenuOpen,
     isWishlisted,
-    product,
     quantity,
-    relatedProducts,
     selectedColor,
     selectedSize,
     setActiveTab,
@@ -95,32 +91,30 @@ const ProductGrid = ({
           </div>
 
           {/* Tabs */}
-          {showTabs && (
-            <div className="animate-slide-in-left mb- flex justify-center">
-              <div className="inline-flex gap-4 rounded-lg bg-gray-800 p-1">
-                <button
-                  onClick={() => setActiveTab('women')}
-                  className={`font-poppins cursor-pointer rounded-md px-6 py-2 font-medium transition-all duration-200 ${
-                    activeTab === 'women'
-                      ? 'bg-white text-gray-900'
-                      : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                  }`}
-                >
-                  Mujeres
-                </button>
-                <button
-                  onClick={() => setActiveTab('men')}
-                  className={`font-poppins cursor-pointer rounded-md px-6 py-2 font-medium transition-all duration-200 ${
-                    activeTab === 'men'
-                      ? 'bg-white text-gray-900'
-                      : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                  }`}
-                >
-                  Hombres
-                </button>
-              </div>
+          <div className="animate-slide-in-left flex justify-center">
+            <div className="inline-flex gap-4 rounded-lg bg-gray-800 p-1">
+              <button
+                onClick={() => setActiveTab('women')}
+                className={`font-poppins cursor-pointer rounded-md px-6 py-2 font-medium transition-all duration-200 ${
+                  activeTab === 'women'
+                    ? 'bg-white text-gray-900'
+                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                }`}
+              >
+                Mujeres
+              </button>
+              <button
+                onClick={() => setActiveTab('men')}
+                className={`font-poppins cursor-pointer rounded-md px-6 py-2 font-medium transition-all duration-200 ${
+                  activeTab === 'men'
+                    ? 'bg-white text-gray-900'
+                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                }`}
+              >
+                Hombres
+              </button>
             </div>
-          )}
+          </div>
         </div>
 
         {/* Products Grid */}

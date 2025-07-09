@@ -39,7 +39,7 @@ export function MainContextProvider({ children }) {
       !['all', 'sale', 'new'].includes(activeTab) &&
       product.gender !== activeTab
     )
-      return false; // Género
+      return false;
     if (showSaleOnly && !product.isSale) return false;
     if (showNewOnly && !product.isNew) return false;
     if (product.price < minPrice || product.price > maxPrice) return false;

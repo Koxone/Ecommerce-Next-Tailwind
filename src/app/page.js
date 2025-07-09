@@ -50,12 +50,11 @@ export default function HomePage() {
         />
       </ScrollReveal>
 
-      {/* ProductGrid - SHOP DROP 3 */}
-      <ScrollReveal>
-        <ProductGrid />
-      </ScrollReveal>
-
-      <div className="flex w-full max-w-7xl flex-col justify-self-center md:px-10 gap-6">
+      <div className="flex w-full max-w-7xl flex-col gap-6 justify-self-center md:px-10">
+        {/* ProductGrid - SHOP DROP 3 */}
+        <ScrollReveal>
+          <ProductGrid />
+        </ScrollReveal>
         {/* Categories Sections */}
         <ScrollReveal>
           <CategoriesContainer title="CATEGORIAS" />

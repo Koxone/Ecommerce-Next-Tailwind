@@ -3,11 +3,29 @@
 import { useMainContext } from '@/context/MainContext';
 import React from 'react';
 
+const categories = [
+  {
+    title: 'Shirts',
+    href: '/collections/mens-shirts',
+    img: '//alphaleteathletics.com/cdn/shop/files/shirts_3042a37b-e9cd-42fc-8393-418253a68a40.jpg?crop=center&v=1750870312&width=2000',
+  },
+  {
+    title: 'Shorts',
+    href: '/collections/mens-shorts',
+    img: '//alphaleteathletics.com/cdn/shop/files/shorts_dd6e174b-eff9-4b14-9453-b3a7c14da9ba.jpg?crop=center&v=1750870312&width=2000',
+  },
+  {
+    title: 'Pants',
+    href: '/collections/mens-joggers',
+    img: '//alphaleteathletics.com/cdn/shop/files/pants_fe80ca86-aa8c-4654-b06f-6559d0f41c57.jpg?crop=center&v=1750870312&width=2000',
+  },
+];
+
 function PromotionalContainer({ title }) {
   const { promoSections } = useMainContext();
 
   return (
-    <section className="w-full py-4 md:px-8">
+    <section className="flex w-full flex-col items-start justify-center">
       <div className="animate-fade-in mb-4 pl-5 text-left md:pl-0">
         <h2 className="text-lg font-bold tracking-wider text-neutral-400 uppercase">
           explora
@@ -18,7 +36,7 @@ function PromotionalContainer({ title }) {
       </div>
 
       {/* Horizontal Scroll Container */}
-      <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 px-5 md:px-0">
+      <div className="flex w-full snap-x snap-mandatory justify-between gap-4 overflow-x-auto px-5 pb-4 md:px-0">
         {promoSections.map((section, idx) => (
           <div
             key={idx}
@@ -36,12 +54,11 @@ function PromotionalContainer({ title }) {
               <h3 className="text-2xl font-bold text-white uppercase">
                 {section.title}
               </h3>
-              <p className="text-sm text-white">{section.subtitle}</p>
               <a
-                href={section.href || '#'}
+                href={section.href}
                 className="rounded-full bg-white px-10 py-2 text-center font-semibold text-black uppercase transition-all duration-300 ease-in-out hover:bg-neutral-300"
               >
-                {section.buttonText || 'Learn More'}
+                Shop Now
               </a>
             </div>
           </div>

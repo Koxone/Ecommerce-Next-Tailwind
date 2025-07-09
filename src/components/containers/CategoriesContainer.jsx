@@ -22,7 +22,7 @@ const categories = [
 
 export default function CategoriesContainer({ title }) {
   return (
-    <section className="w-full md:px-8">
+    <section className="flex w-full flex-col items-start justify-center">
       <div className="animate-fade-in mb-4 pl-5 text-left md:pl-0">
         <h2 className="text-lg font-bold tracking-wider text-neutral-400 uppercase">
           explora
@@ -33,7 +33,7 @@ export default function CategoriesContainer({ title }) {
       </div>
 
       {/* Horizontal Scroll Container */}
-      <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 md:px-0">
+      <div className="flex w-full snap-x snap-mandatory justify-between gap-4 overflow-x-auto px-5 pb-4 md:px-0">
         {categories.map((cat, idx) => (
           <div
             key={idx}

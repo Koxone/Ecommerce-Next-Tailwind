@@ -1,11 +1,12 @@
-'use client';
-import { useEffect, useState } from 'react';
 import { Montserrat, Inter } from 'next/font/google';
 import '@/app/globals.css';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import I18nProvider from '@/components/providers/I18nProvider';
 import PageTransitionWrapper from '@/components/PageTransitionWrapper';
 import { MainContextProvider } from '@/context/MainContext';
+import Header from '@/components/headers/Header';
+import Footer from '@/components/footers/Footer';
+import { AuthProvider } from '@/context/AuthContext';
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -20,22 +21,20 @@ const inter = Inter({
 });
 
 export default function RootLayout({ children }) {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
-
   return (
-    <MainContextProvider>
-      <html lang="es" className={`${montserrat.variable} ${inter.variable}`}>
-        <body className={isLoaded ? 'animate-slide-up' : ''}>
-          <I18nProvider>
-            <PageTransitionWrapper>{children}</PageTransitionWrapper>
-          </I18nProvider>
-          <SpeedInsights />
-        </body>
-      </html>
-    </MainContextProvider>
+    <AuthProvider>
+      <MainContextProvider>
+        <html lang="es" className={`${montserrat.variable} ${inter.variable}`}>
+          <body>
+            <I18nProvider>
+              <Header />
+              <PageTransitionWrapper>{children}</PageTransitionWrapper>
+              <Footer />
+            </I18nProvider>
+            <SpeedInsights />
+          </body>
+        </html>
+      </MainContextProvider>
+    </AuthProvider>
   );
 }

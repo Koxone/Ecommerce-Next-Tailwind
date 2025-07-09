@@ -2,7 +2,9 @@
 
 import { useState } from 'react';
 import ProductCard from './cards/ProductCard';
-import { FilterIcon, GridIcon, ListIcon } from './Icons';
+import { useMainContext } from '@/context/MainContext';
+import productsData from '@/data/products/productsData';
+import { usePathname, useRouter } from 'next/navigation';
 
 const ProductGrid = ({
   title = 'SHOP DROP 1',
@@ -12,107 +14,47 @@ const ProductGrid = ({
   showViewToggle = true,
   className = '',
 }) => {
-  const [activeTab, setActiveTab] = useState('women');
-  const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
+  const [viewMode, setViewMode] = useState('grid');
   const [sortBy, setSortBy] = useState('featured');
 
-  // Sample products if none provided
-  const defaultProducts = [
-    {
-      id: 1,
-      name: 'Sandy Bra',
-      description: "Women's Seamless Scrunch Bra",
-      color: 'Acai Berry',
-      price: 48,
-      image: '/Muestra.jpg',
-      images: ['/Muestra.jpg', '/Muestra.jpg'],
-      colors: ['#8B5CF6', '#1F2937', '#EF4444'],
-      sizes: ['XS', 'S', 'M', 'L', 'XL'],
-      rating: 4.5,
-      reviewCount: 128,
-      isNew: false,
-      category: 'women',
-    },
-    {
-      id: 2,
-      name: 'Pump Short',
-      description: "Women's Seamless Short",
-      color: 'Acai Berry',
-      price: 50,
-      image: '/Muestra.jpg',
-      images: ['/Muestra.jpg', '/Muestra.jpg'],
-      colors: ['#10B981', '#1F2937'],
-      sizes: ['XS', 'S', 'M', 'L', 'XL'],
-      rating: 4.8,
-      reviewCount: 95,
-      isNew: true,
-      category: 'women',
-    },
-    {
-      id: 3,
-      name: 'Push Tank',
-      description: "Women's 2 in 1 Seamless Tank",
-      color: 'Emerald Green',
-      price: 46,
-      image: '/Muestra.jpg',
-      images: ['/Muestra.jpg', '/Muestra.jpg'],
-      colors: ['#059669', '#DC2626', '#1F2937'],
-      sizes: ['XS', 'S', 'M', 'L', 'XL'],
-      rating: 4.3,
-      reviewCount: 67,
-      isNew: true,
-      category: 'women',
-    },
-    {
-      id: 4,
-      name: 'Pump Legging',
-      description: "Women's Seamless Legging",
-      color: 'Emerald Green',
-      price: 70,
-      image: '/Muestra.jpg',
-      images: ['/Muestra.jpg', '/Muestra.jpg'],
-      colors: ['#047857', '#1F2937', '#7C3AED'],
-      sizes: ['XS', 'S', 'M', 'L', 'XL'],
-      rating: 4.7,
-      reviewCount: 203,
-      isNew: false,
-      category: 'women',
-    },
-    {
-      id: 5,
-      name: 'Alpha Tank',
-      description: "Men's Performance Tank",
-      color: 'Charcoal',
-      price: 42,
-      image: '/Muestra.jpg',
-      images: ['/Muestra.jpg', '/Muestra.jpg'],
-      colors: ['#374151', '#1F2937', '#FFFFFF'],
-      sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-      rating: 4.4,
-      reviewCount: 89,
-      isNew: false,
-      category: 'men',
-    },
-    {
-      id: 6,
-      name: 'Elite Shorts',
-      description: "Men's Training Shorts",
-      color: 'Navy',
-      price: 55,
-      image: '/Muestra.jpg',
-      images: ['/Muestra.jpg', '/Muestra.jpg'],
-      colors: ['#1E3A8A', '#1F2937', '#059669'],
-      sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-      rating: 4.6,
-      reviewCount: 156,
-      isNew: true,
-      category: 'men',
-    },
-  ];
+  const pathname = usePathname();
+
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push('/product-view');
+  };
+
+  const {
+    activeTab,
+    heroItems,
+    isRevealed,
+    setIsRevealed,
+    carouselItems,
+    currentPage,
+    handleQuantityChange,
+    headerButtons,
+    isCartOpen,
+    isMenuOpen,
+    isWishlisted,
+    quantity,
+    selectedColor,
+    selectedSize,
+    setActiveTab,
+    setCurrentPage,
+    setIsCartOpen,
+    setIsMenuOpen,
+    setIsWishlisted,
+    setQuantity,
+    setSelectedColor,
+    setSelectedSize,
+  } = useMainContext();
+
+  const defaultProducts = productsData;
 
   const displayProducts = products.length > 0 ? products : defaultProducts;
   const filteredProducts = showTabs
-    ? displayProducts.filter((product) => product.category === activeTab)
+    ? displayProducts.filter((product) => product.gender === activeTab)
     : displayProducts;
 
   const sortedProducts = [...filteredProducts].sort((a, b) => {
@@ -131,8 +73,12 @@ const ProductGrid = ({
   });
 
   return (
-    <section className="animate-fade-in bg-gray-900 py-16">
-      <div className="mx-auto max-w-7xl px-4 flex flex-col gap-5 sm:px-6 lg:px-8">
+    <section
+      className={`animate-fade-in bg-gray-900 ${
+        pathname === '/' ? 'pt-16' : 'py-1'
+      }`}
+    >
+      <div className="mx-auto flex w-full flex-col gap-5 px-4 sm:px-0">
         {/* Section Header */}
         <div className="flex flex-col items-start">
           <div className="animate-fade-in text-left">
@@ -145,39 +91,37 @@ const ProductGrid = ({
           </div>
 
           {/* Tabs */}
-          {showTabs && (
-            <div className="animate-slide-in-left mb- flex justify-center">
-              <div className="inline-flex gap-4 rounded-lg bg-gray-800 p-1">
-                <button
-                  onClick={() => setActiveTab('women')}
-                  className={`font-poppins cursor-pointer rounded-md px-6 py-2 font-medium transition-all duration-200 ${
-                    activeTab === 'women'
-                      ? 'bg-white text-gray-900'
-                      : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                  }`}
-                >
-                  Mujeres
-                </button>
-                <button
-                  onClick={() => setActiveTab('men')}
-                  className={`font-poppins cursor-pointer rounded-md px-6 py-2 font-medium transition-all duration-200 ${
-                    activeTab === 'men'
-                      ? 'bg-white text-gray-900'
-                      : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                  }`}
-                >
-                  Hombres
-                </button>
-              </div>
+          <div className="animate-slide-in-left flex justify-center">
+            <div className="inline-flex gap-4 rounded-lg bg-gray-800 p-1">
+              <button
+                onClick={() => setActiveTab('women')}
+                className={`font-poppins cursor-pointer rounded-md px-6 py-2 font-medium transition-all duration-200 ${
+                  activeTab === 'women'
+                    ? 'bg-white text-gray-900'
+                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                }`}
+              >
+                Mujeres
+              </button>
+              <button
+                onClick={() => setActiveTab('men')}
+                className={`font-poppins cursor-pointer rounded-md px-6 py-2 font-medium transition-all duration-200 ${
+                  activeTab === 'men'
+                    ? 'bg-white text-gray-900'
+                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                }`}
+              >
+                Hombres
+              </button>
             </div>
-          )}
+          </div>
         </div>
 
         {/* Products Grid */}
         <div
           className={`animate-fade-in gap-6 ${
             viewMode === 'grid'
-              ? 'flex snap-x snap-mandatory overflow-x-auto sm:grid sm:grid-cols-2 xl:grid xl:grid-cols-4'
+              ? 'flex w-full snap-x snap-mandatory overflow-x-auto'
               : 'grid grid-cols-1'
           }`}
         >
@@ -197,7 +141,10 @@ const ProductGrid = ({
 
         {/* View All Button */}
         <div className="animate-fade-in mt-12 text-center">
-          <button className="hover-lift focus-ring font-poppins rounded-lg bg-white px-8 py-3 font-semibold text-gray-900 transition-all duration-200 hover:bg-gray-100">
+          <button
+            onClick={handleClick}
+            className="hover-lift focus-ring font-poppins cursor-pointer rounded-lg bg-white px-8 py-3 font-semibold text-gray-900 transition-all duration-200 hover:bg-gray-400"
+          >
             View All
           </button>
         </div>

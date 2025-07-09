@@ -13,31 +13,75 @@ import HeaderButton from '../buttons/HeaderButton';
 import Cart from '../cart/Cart';
 import { useMainContext } from '@/context/MainContext';
 import MobileMenu from '../nav/MobileMenu';
+import LogoButton from '../buttons/LogoButton';
+import { useRouter } from 'next/navigation';
 
 const Header = () => {
   const {
-    activeTab,
-    carouselItems,
+    // Page & Header
     currentPage,
-    handleQuantityChange,
-    headerButtons,
-    isCartOpen,
-    isMenuOpen,
-    isWishlisted,
-    product,
-    quantity,
-    relatedProducts,
-    selectedColor,
-    selectedSize,
-    setActiveTab,
     setCurrentPage,
-    setIsCartOpen,
+    isMenuOpen,
     setIsMenuOpen,
-    setIsWishlisted,
-    setQuantity,
-    setSelectedColor,
+    isCartOpen,
+    setIsCartOpen,
+    isRevealed,
+    setIsRevealed,
+    headerButtons,
+
+    // Auth
+    isLoggedIn,
+    setIsLoggedIn,
+
+    // Filters & Sorting
+    activeTab,
+    setActiveTab,
+    showSaleOnly,
+    setShowSaleOnly,
+    showNewOnly,
+    setShowNewOnly,
+    minPrice,
+    setMinPrice,
+    maxPrice,
+    setMaxPrice,
+    minRating,
+    setMinRating,
+    sortBy,
+    setSortBy,
+
+    // Products
+    filteredProducts,
+    sortedProducts,
+
+    // Product Details
+    selectedSize,
     setSelectedSize,
+    selectedColor,
+    setSelectedColor,
+    selectedColorIndex,
+    setSelectedColorIndex,
+    quantity,
+    setQuantity,
+    handleQuantityChange,
+    activeTabProduct,
+    setActiveTabProduct,
+    isWishlisted,
+    setIsWishlisted,
+
+    // UI Data
+    heroItems,
+    carouselItems,
+    shopData,
   } = useMainContext();
+
+  const router = useRouter();
+  const handleClick = () => {
+    if (!isLoggedIn) {
+      router.push('/auth/login');
+    } else {
+      router.push('/user-profile');
+    }
+  };
 
   return (
     <>
@@ -50,13 +94,7 @@ const Header = () => {
       <header className="sticky top-0 z-50 border-b border-gray-700 bg-gray-900">
         <div className="grid h-16 w-full grid-cols-[auto_1fr_auto] items-center justify-between pl-5">
           {/* Logo */}
-          <button className="flex max-w-[120px] cursor-pointer items-center md:h-[37px] md:max-w-[160px]">
-            {/* <p className="flex items-center text-[30px] font-extrabold md:text-5xl">
-              <span className="bg-red-500 px-1 text-gray-900">FWS</span>
-              <span className="-ml-1.5 font-bold text-white">HOP</span>
-            </p> */}
-            <img src="/logo.png" alt="" />
-          </button>
+          <LogoButton />
 
           {/* Desktop Navigation Buttons */}
           <nav className="hidden justify-center space-x-8 lg:flex">
@@ -64,7 +102,10 @@ const Header = () => {
               <HeaderButton
                 key={value}
                 text={text}
-                onClick={() => setCurrentPage(value)}
+                onClick={() => {
+                  setActiveTab(value);
+                  router.push('/product-view');
+                }}
               />
             ))}
           </nav>
@@ -74,7 +115,10 @@ const Header = () => {
             <button className="cursor-pointer p-2 text-gray-300 hover:text-white">
               <SearchIcon size={20} />
             </button>
-            <button className="cursor-pointer p-2 text-gray-300 hover:text-white">
+            <button
+              onClick={handleClick}
+              className="cursor-pointer p-2 text-gray-300 hover:text-white"
+            >
               <UserIcon size={20} />
             </button>
             <button

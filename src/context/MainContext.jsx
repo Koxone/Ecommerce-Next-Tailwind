@@ -25,21 +25,28 @@ export function MainContextProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Filter Handler
-  const [activeTab, setActiveTab] = useState('women'); 
+  const [activeTab, setActiveTab] = useState('all');
   const [showSaleOnly, setShowSaleOnly] = useState(false);
-  const [showNewOnly, setShowNewOnly] = useState(false); 
+  const [showNewOnly, setShowNewOnly] = useState(false);
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(Infinity);
   const [minRating, setMinRating] = useState(0);
-  const [sortBy, setSortBy] = useState('featured'); 
+  const [sortBy, setSortBy] = useState('featured');
   const filteredProducts = productsData.filter((product) => {
-    if (activeTab !== 'all' && product.gender !== activeTab) return false;
+    if (activeTab === 'sale' && !product.isSale) return false;
+    if (activeTab === 'new' && !product.isNew) return false;
+    if (
+      !['all', 'sale', 'new'].includes(activeTab) &&
+      product.gender !== activeTab
+    )
+      return false; // Género
     if (showSaleOnly && !product.isSale) return false;
     if (showNewOnly && !product.isNew) return false;
     if (product.price < minPrice || product.price > maxPrice) return false;
     if (product.rating < minRating) return false;
     return true;
   });
+
   const sortedProducts = [...filteredProducts].sort((a, b) => {
     switch (sortBy) {
       case 'price-low':

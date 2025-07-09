@@ -18,30 +18,60 @@ import { useRouter } from 'next/navigation';
 
 const Header = () => {
   const {
-    activeTab,
-    isLoggedIn,
-    setIsLoggedIn,
-    heroItems,
+    // Page & Header
+    currentPage,
+    setCurrentPage,
+    isMenuOpen,
+    setIsMenuOpen,
+    isCartOpen,
+    setIsCartOpen,
     isRevealed,
     setIsRevealed,
-    carouselItems,
-    currentPage,
-    handleQuantityChange,
     headerButtons,
-    isCartOpen,
-    isMenuOpen,
-    isWishlisted,
-    quantity,
-    selectedColor,
-    selectedSize,
+
+    // Auth
+    isLoggedIn,
+    setIsLoggedIn,
+
+    // Filters & Sorting
+    activeTab,
     setActiveTab,
-    setCurrentPage,
-    setIsCartOpen,
-    setIsMenuOpen,
-    setIsWishlisted,
-    setQuantity,
-    setSelectedColor,
+    showSaleOnly,
+    setShowSaleOnly,
+    showNewOnly,
+    setShowNewOnly,
+    minPrice,
+    setMinPrice,
+    maxPrice,
+    setMaxPrice,
+    minRating,
+    setMinRating,
+    sortBy,
+    setSortBy,
+
+    // Products
+    filteredProducts,
+    sortedProducts,
+
+    // Product Details
+    selectedSize,
     setSelectedSize,
+    selectedColor,
+    setSelectedColor,
+    selectedColorIndex,
+    setSelectedColorIndex,
+    quantity,
+    setQuantity,
+    handleQuantityChange,
+    activeTabProduct,
+    setActiveTabProduct,
+    isWishlisted,
+    setIsWishlisted,
+
+    // UI Data
+    heroItems,
+    carouselItems,
+    shopData,
   } = useMainContext();
 
   const router = useRouter();
@@ -72,7 +102,10 @@ const Header = () => {
               <HeaderButton
                 key={value}
                 text={text}
-                onClick={() => setCurrentPage(value)}
+                onClick={() => {
+                  setActiveTab(value);
+                  router.push('/product-view');
+                }}
               />
             ))}
           </nav>

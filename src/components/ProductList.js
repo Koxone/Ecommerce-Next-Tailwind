@@ -1,4 +1,5 @@
 'use client';
+
 import { useEffect, useState } from 'react';
 import ProductCard from './cards/ProductCard';
 
@@ -22,7 +23,7 @@ export default function ProductList() {
           dessert: '#C2B280',
         };
 
-        const adaptedProducts = data.map((product) => {
+        const adaptedProducts = data.map((product, index) => {
           const variant = product.variants.edges[0].node;
           const price = parseFloat(variant.price.amount);
           const compareAtPrice = variant.compareAtPrice?.amount
@@ -43,6 +44,7 @@ export default function ProductList() {
           const colorsOption = product.options.find(
             (opt) => opt.name.toLowerCase() === 'color'
           );
+
           const colors = colorsOption
             ? colorsOption.values.map((value) => ({
                 name: value,
@@ -55,46 +57,45 @@ export default function ProductList() {
               opt.name.toLowerCase() === 'size' ||
               opt.name.toLowerCase() === 'talla'
           );
+
           const sizes = sizesOption ? sizesOption.values : [];
 
           const images = {};
-          if (colorsOption) {
-            colorsOption.values.forEach((colorName) => {
-              images[colorName] = product.images.edges.map(
-                (img) => img.node.url
-              );
+          if (colors.length > 0) {
+            colors.forEach((color, idx) => {
+              images[color.name] = product.images.edges[idx]
+                ? [product.images.edges[idx].node.url]
+                : [product.images.edges[0].node.url];
             });
           } else {
-            images['default'] = product.images.edges.map((img) => img.node.url);
+            images['Default'] = product.images.edges.map((img) => img.node.url);
           }
 
-          // Parse gender2 as string
           const gender = product.gender2?.value
-            ? JSON.parse(product.gender2.value)[0] // toma el primer valor
+            ? JSON.parse(product.gender2.value)[0]?.toLowerCase() || ''
             : '';
 
-          // Parse categories as array
           const categories = product.categories?.value
             ? JSON.parse(product.categories.value)
             : [];
 
           return {
-            id: product.id,
+            id: index + 1, // 🔹 ID consecutivo: 1, 2, 3, 4...
             name: product.title,
-            cardText: cardText,
+            cardText,
             description: product.description,
             about: product.about?.value || '',
             color: colors[0]?.name || '',
-            price: price,
-            images: images,
-            colors: colors,
-            sizes: sizes,
+            price,
+            images,
+            colors,
+            sizes,
             rating: 4.5,
             reviewCount: 128,
             isNew: product.is_new?.value === 'true',
             isSale: isSale || product.is_sale?.value === 'true',
-            discount: discount,
-            gender: gender,
+            discount,
+            gender,
             category: categories,
           };
         });
@@ -115,7 +116,10 @@ export default function ProductList() {
   return (
     <div className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 md:grid-cols-3">
       {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
+        <ProductCard
+          key={product.id}
+          product={{ ...product, customId: index + 1 }}
+        />
       ))}
     </div>
   );

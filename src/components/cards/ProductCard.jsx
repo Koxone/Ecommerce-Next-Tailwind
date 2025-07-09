@@ -14,10 +14,9 @@ const ProductCard = ({
 }) => {
   const [localColorIndex, setLocalColorIndex] = useState(0);
   const router = useRouter();
-
-  // Wishlist Handler
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
 
@@ -25,6 +24,7 @@ const ProductCard = ({
     const savedWishlist = localStorage.getItem(`wishlist-${product.id}`);
     setIsWishlisted(savedWishlist === 'true');
   }, [product.id]);
+
   const handleWishlistToggle = (e) => {
     e.stopPropagation();
     const newIsWishlisted = !isWishlisted;
@@ -37,14 +37,15 @@ const ProductCard = ({
   };
 
   const handleClick = () => {
-    router.push(`/product-detail/${product.id}`);
+    router.push(`/product-detail/${product.customId}`);
   };
 
   const currentColorName = product.colors?.[localColorIndex]?.name;
-  const productImages = product.images?.[currentColorName];
+  const productImages =
+    product.images?.[currentColorName] || product.images?.['Default'];
   const displayImage = productImages
     ? isHovered
-      ? productImages[1] || productImages[0] 
+      ? productImages[1] || productImages[0]
       : productImages[0]
     : product.image;
 
@@ -56,7 +57,6 @@ const ProductCard = ({
     <div
       className={`group hover-lift relative max-w-[300px] overflow-hidden rounded-lg border border-neutral-300/10 bg-gray-800 transition-all duration-300 ${className}`}
     >
-      {/* Product Image */}
       <div
         className="relative aspect-square w-full overflow-hidden"
         onMouseEnter={handleMouseEnter}
@@ -72,21 +72,19 @@ const ProductCard = ({
           sizes="(max-width: 768px) 100vw, 500px"
         />
 
-        {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-2">
           {product.isNew && (
             <span className="animate-scale-in rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900">
               NEW
             </span>
           )}
-          {product.discount && (
+          {product.discount > 0 && (
             <span className="animate-scale-in rounded bg-red-500 px-2 py-1 text-xs font-semibold text-white">
               -{product.discount}%
             </span>
           )}
         </div>
 
-        {/* Wishlist Button */}
         {showWishlist && (
           <button
             onClick={handleWishlistToggle}
@@ -100,7 +98,6 @@ const ProductCard = ({
           </button>
         )}
 
-        {/* Quick View Button */}
         {showQuickView && (
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
             <button
@@ -113,9 +110,7 @@ const ProductCard = ({
         )}
       </div>
 
-      {/* Bottom Product Info */}
       <div className="p-4">
-        {/* Colors Preview Buttons */}
         {product.colors && product.colors.length > 0 && (
           <div className="mb-3 flex gap-2">
             {product.colors.map((color, index) => (
@@ -133,26 +128,22 @@ const ProductCard = ({
           </div>
         )}
 
-        {/* Product Title */}
         <h3 className="font-montserrat mb-1 text-lg font-semibold text-white transition-colors duration-200 group-hover:text-gray-300">
           {product.name}
         </h3>
 
-        {/* Product Description */}
         {product.description && (
           <p className="font-inter mb-2 max-h-20 overflow-y-auto text-sm text-gray-400">
             {product.cardText}
           </p>
         )}
 
-        {/* Product Color Name */}
         {product.colors && product.colors.length > 0 && (
           <p className="font-inter mb-2 text-sm text-gray-500">
             {product.colors[localColorIndex]?.name}
           </p>
         )}
 
-        {/* Product Rating */}
         {showRating && product.rating && (
           <div className="mb-2 flex items-center gap-1">
             {[...Array(5)].map((_, i) => (
@@ -169,7 +160,6 @@ const ProductCard = ({
           </div>
         )}
 
-        {/* Product Price */}
         <div className="flex items-center gap-2">
           <span className="font-poppins text-lg font-bold text-white">
             ${discountedPrice}
@@ -181,7 +171,6 @@ const ProductCard = ({
           )}
         </div>
 
-        {/* Product Sizes */}
         {product.sizes && product.sizes.length > 0 && (
           <div className="mt-3 flex gap-2">
             {product.sizes.map((size, index) => (

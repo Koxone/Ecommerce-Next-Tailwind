@@ -53,9 +53,8 @@ const ProductGrid = ({
   const defaultProducts = productsData;
 
   const displayProducts = products.length > 0 ? products : defaultProducts;
-  const filteredProducts = showTabs
-    ? displayProducts.filter((product) => product.gender === activeTab)
-    : displayProducts;
+const filteredProducts = displayProducts; // TEMP sin filtro
+
 
   const sortedProducts = [...filteredProducts].sort((a, b) => {
     switch (sortBy) {

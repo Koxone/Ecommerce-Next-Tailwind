@@ -4,6 +4,7 @@ import Carousel from '@/components/carousels/Carousel';
 import PromoSectionContainer from '@/components/containers/PromoSectionContainer';
 import NewsLetter from '@/components/newsletter/NewsLetter';
 import ProductGrid from '@/components/ProductGrid';
+import ProductGridShopify from '@/components/ProductGridShopify';
 import ProductList from '@/components/ProductList';
 import { useMainContext } from '@/context/MainContext';
 
@@ -49,7 +50,8 @@ export default function HomePage() {
       <div className="flex w-full max-w-7xl flex-col gap-6 justify-self-center md:px-10">
         {/* ProductGrid - SHOP DROP 3 */}
         <div>
-          <ProductGrid />
+          <ProductGridShopify />
+          {/* <ProductGrid /> */}
         </div>
         {/* Categories Sections */}
         <div>

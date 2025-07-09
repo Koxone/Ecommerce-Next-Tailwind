@@ -16,10 +16,12 @@ const ProductCard = ({
   const router = useRouter();
 
   // Wishlist Handler
-  const [isWishlisted, setIsWishlisted] = useState(() => {
-    const savedWishlist = localStorage.getItem(`wishlist-${product.id}`);
-    return savedWishlist === 'true';
-  });
+const [isWishlisted, setIsWishlisted] = useState(false);
+
+useEffect(() => {
+  const savedWishlist = localStorage.getItem(`wishlist-${product.id}`);
+  setIsWishlisted(savedWishlist === 'true');
+}, [product.id]);
   const handleWishlistToggle = (e) => {
     e.stopPropagation();
     const newIsWishlisted = !isWishlisted;

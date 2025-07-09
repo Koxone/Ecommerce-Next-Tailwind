@@ -1,8 +1,7 @@
 'use client';
 
 import Carousel from '@/components/carousels/Carousel';
-import CategoriesContainer from '@/components/containers/CategoriesContainer';
-import PromotionalContainer from '@/components/containers/PromotionalContainer';
+import PromoSectionContainer from '@/components/containers/PromoSectionContainer';
 import NewsLetter from '@/components/newsletter/NewsLetter';
 import ProductGrid from '@/components/ProductGrid';
 import { useMainContext } from '@/context/MainContext';
@@ -57,12 +56,12 @@ export default function HomePage() {
         </ScrollReveal>
         {/* Categories Sections */}
         <ScrollReveal>
-          <CategoriesContainer title="CATEGORIAS" />
+          <PromoSectionContainer type="categories" />
         </ScrollReveal>
 
         {/* Promotional Sections */}
         <ScrollReveal>
-          <PromotionalContainer title="NOVEDADES" />
+          <PromoSectionContainer type="promos" />
         </ScrollReveal>
       </div>
 

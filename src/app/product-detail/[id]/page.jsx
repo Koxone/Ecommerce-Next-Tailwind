@@ -12,7 +12,7 @@ import {
 import { useMainContext } from '../../../context/MainContext';
 import productsData from '@/data/products/productsData';
 import ExpandableText from '@/components/text/ExpandableText';
-import CategoriesContainer from '@/components/containers/CategoriesContainer';
+import PromoSectionContainer from '@/components/containers/PromoSectionContainer';
 
 function ProductDetail({ params }) {
   const { id } = params;
@@ -257,9 +257,9 @@ function ProductDetail({ params }) {
       </div>
 
       {/* Related Products */}
-      <div className="col-span-1 md:col-span-2">
+      <div className="col-span-1 flex flex-col gap-10 md:col-span-2">
         <ProductGrid title="BUSCAS ALGO MAS?" />
-        <CategoriesContainer title="nuestras categorias" />
+        <PromoSectionContainer type="categories" />
       </div>
     </div>
   );

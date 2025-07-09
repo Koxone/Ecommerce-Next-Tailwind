@@ -214,6 +214,46 @@ export function MainContextProvider({ children }) {
     },
   ];
 
+  const shopData = {
+    categories: [
+      {
+        title: 'Shirts',
+        href: '/collections/mens-shirts',
+        img: '//alphaleteathletics.com/cdn/shop/files/shirts_3042a37b-e9cd-42fc-8393-418253a68a40.jpg?crop=center&v=1750870312&width=2000',
+      },
+      {
+        title: 'Shorts',
+        href: '/collections/mens-shorts',
+        img: '//alphaleteathletics.com/cdn/shop/files/shorts_dd6e174b-eff9-4b14-9453-b3a7c14da9ba.jpg?crop=center&v=1750870312&width=2000',
+      },
+      {
+        title: 'Pants',
+        href: '/collections/mens-joggers',
+        img: '//alphaleteathletics.com/cdn/shop/files/pants_fe80ca86-aa8c-4654-b06f-6559d0f41c57.jpg?crop=center&v=1750870312&width=2000',
+      },
+    ],
+    promos: [
+      {
+        title: 'PARA ELLA',
+        subtitle: 'Ropa que no solo es comoda, se ve bien!',
+        image: '/promo1.jpg',
+        buttonText: 'COMPRA YA',
+      },
+      {
+        title: 'PARA EL',
+        subtitle: 'Sientete seguro en cualquier momento',
+        image: '/promo4.jpg',
+        buttonText: 'COMPRA YA',
+      },
+      {
+        title: 'ACCESORIOS',
+        subtitle: 'No importa la ocasion, lo tenemos!',
+        image: '/promo5.jpg',
+        buttonText: 'COMPRA YA',
+      },
+    ],
+  };
+
   const categoryItems = [
     <div
       key="cat1"
@@ -263,6 +303,7 @@ export function MainContextProvider({ children }) {
     <MainContext.Provider
       value={{
         activeTab,
+        shopData,
         activeTabProduct,
         setActiveTabProduct,
         selectedColor,

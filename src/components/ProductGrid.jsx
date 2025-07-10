@@ -2,29 +2,27 @@
 
 import { useState } from 'react';
 import ProductCard from './cards/ProductCard';
-import { useMainContext } from '@/context/MainContext';
 import productsData from '@/data/products/productsData';
 import { usePathname, useRouter } from 'next/navigation';
 import ProductFilters from '@/components/filters/ProductFilters';
+import { useMainContext } from '@/context/MainContext';
 
 const ProductGrid = ({ title = 'SHOP DROP 1', showTabs = true }) => {
   const [viewMode, setViewMode] = useState('grid');
   const pathname = usePathname();
   const router = useRouter();
+  const { activeTab, setActiveTab, sortBy, setSortBy } = useMainContext();
 
   const handleClick = () => {
     router.push('/product-view');
   };
 
-  const { activeTab, setActiveTab, sortBy, setSortBy } = useMainContext();
-
-  const displayProducts = productsData; 
-
+  // Siempre usa productsData
   const filteredProducts = showTabs
     ? activeTab === 'all'
-      ? displayProducts
-      : displayProducts.filter((product) => product.gender === activeTab)
-    : displayProducts;
+      ? productsData
+      : productsData.filter((product) => product.gender === activeTab)
+    : productsData;
 
   const sortedProducts = [...filteredProducts].sort((a, b) => {
     switch (sortBy) {
@@ -48,7 +46,7 @@ const ProductGrid = ({ title = 'SHOP DROP 1', showTabs = true }) => {
       }`}
     >
       <div className="mx-auto flex w-full flex-col gap-5 px-4 sm:px-0">
-        {/* Section Header */}
+        {/* Header */}
         <div className="flex flex-col items-start">
           <div className="animate-fade-in text-left">
             <h2 className="text-lg font-bold tracking-wider text-neutral-400">
@@ -59,7 +57,7 @@ const ProductGrid = ({ title = 'SHOP DROP 1', showTabs = true }) => {
             </h2>
           </div>
 
-          {/* Section Filters */}
+          {/* Filters */}
           <div className="animate-slide-in-left w-full">
             <ProductFilters
               activeCategory={activeTab}
@@ -71,7 +69,7 @@ const ProductGrid = ({ title = 'SHOP DROP 1', showTabs = true }) => {
           </div>
         </div>
 
-        {/* Products Grid */}
+        {/* Product Cards */}
         <div
           className={`animate-fade-in gap-6 ${
             viewMode === 'grid'
@@ -83,7 +81,7 @@ const ProductGrid = ({ title = 'SHOP DROP 1', showTabs = true }) => {
             <div
               key={product.id}
               className="animate-scale-in flex items-center justify-center"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              style={{ animationDelay: `${index * 0.05}s` }}
             >
               <ProductCard
                 product={product}

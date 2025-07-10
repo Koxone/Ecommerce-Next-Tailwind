@@ -10,7 +10,7 @@ export default function ProductsView() {
     useMainContext();
 
   return (
-    <div className="grid min-h-screen grid-cols-[auto_1fr] gap-4 bg-gray-900 px-4 py-8 text-white sm:px-6 lg:px-8">
+    <div className="grid min-h-screen overflow-x-hidden grid-cols-[auto_1fr] gap-4 bg-gray-900 px-4 py-8 text-white sm:px-6 lg:px-8">
       <FiltersSidebar />
       <div className="mx-auto w-full max-w-7xl">
         <h1 className="font-montserrat mb-2 text-3xl font-bold">

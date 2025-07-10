@@ -57,7 +57,7 @@ const productsData = [
         '/products/Men/Shirts/RolledMuscleTee/id-3-2-brown.webp',
         '/products/Men/Shirts/RolledMuscleTee/id-3-3-brown.webp',
         '/products/Men/Shirts/RolledMuscleTee/id-3-4-brown.webp',
-        '/products/Men/Shirts/RolledMuscleTee/id-3-5-brown.webp',
+        '/products/Men/Shirts/RolledMuscleTee/id-3-5-brown.jpg',
         '/products/Men/Shirts/RolledMuscleTee/id-3-6-brown.webp',
       ],
       Black: [

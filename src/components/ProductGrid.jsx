@@ -6,6 +6,7 @@ import productsData from '@/data/products/productsData';
 import { usePathname, useRouter } from 'next/navigation';
 import ProductFilters from '@/components/filters/ProductFilters';
 import { useMainContext } from '@/context/MainContext';
+import ShopifyProductList from './ShopifyProductList';
 
 const ProductGrid = ({ title = 'SHOP DROP 1', showTabs = true }) => {
   const [viewMode, setViewMode] = useState('grid');
@@ -77,10 +78,11 @@ const ProductGrid = ({ title = 'SHOP DROP 1', showTabs = true }) => {
               : 'grid grid-cols-1'
           }`}
         >
-          {sortedProducts.map((product, index) => (
+          <ShopifyProductList />
+          {/* {sortedProducts.map((product, index) => (
             <div
               key={product.id}
-              className="animate-scale-in flex items-center justify-center"
+              className="animate-scale-in flex items-center justify-center border"
               style={{ animationDelay: `${index * 0.05}s` }}
             >
               <ProductCard
@@ -88,7 +90,7 @@ const ProductGrid = ({ title = 'SHOP DROP 1', showTabs = true }) => {
                 className={viewMode === 'list' ? 'flex flex-row' : ''}
               />
             </div>
-          ))}
+          ))} */}
         </div>
 
         {/* View All Button */}

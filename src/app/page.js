@@ -4,6 +4,7 @@ import Carousel from '@/components/carousels/Carousel';
 import PromoSectionContainer from '@/components/containers/PromoSectionContainer';
 import NewsLetter from '@/components/newsletter/NewsLetter';
 import ProductGrid from '@/components/ProductGrid';
+import ShopifyProductList from '@/components/ShopifyProductList';
 import { useMainContext } from '@/context/MainContext';
 import ScrollReveal from '@/utils/ScrollReveal';
 
@@ -50,14 +51,23 @@ export default function HomePage() {
         <ScrollReveal>
           <ProductGrid />
         </ScrollReveal>
+
         {/* Categories Sections */}
         <ScrollReveal>
-          <PromoSectionContainer title="Categorias" subtitle="podria interesarte" type="categories" />
+          <PromoSectionContainer
+            title="Categorias"
+            subtitle="podria interesarte"
+            type="categories"
+          />
         </ScrollReveal>
 
         {/* Promotional Sections */}
         <ScrollReveal>
-          <PromoSectionContainer title="Buscas algo mas?" subtitle="podria interesarte" type="promos" />
+          <PromoSectionContainer
+            title="Buscas algo mas?"
+            subtitle="podria interesarte"
+            type="promos"
+          />
         </ScrollReveal>
       </div>
 
@@ -67,3 +77,14 @@ export default function HomePage() {
     </div>
   );
 }
+
+// import ShopifyProductList from '@/components/ShopifyProductList';
+
+// export default function Home() {
+//   return (
+//     <main className="min-h-screen bg-black text-white">
+//       <h1 className="text-3xl font-bold text-center py-6">Shopify Store</h1>
+//       <ShopifyProductList />
+//     </main>
+//   );
+// }

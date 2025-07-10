@@ -12,10 +12,7 @@ export default function ProductFilters({
   return (
     <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
       <div className="flex items-center gap-2">
-        <button className="flex items-center gap-2 rounded-lg bg-gray-800 px-4 py-2 transition hover:bg-gray-700 md:hidden">
-          <FilterIcon size={18} />
-          <span>Filters</span>
-        </button>
+        
 
         <button
           onClick={() => setActiveCategory('all')}

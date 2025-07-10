@@ -13,6 +13,7 @@ import { useMainContext } from '../../../context/MainContext';
 import productsData from '@/data/products/productsData';
 import ExpandableText from '@/components/text/ExpandableText';
 import PromoSectionContainer from '@/components/containers/PromoSectionContainer';
+import { usePurchase } from '@/context/PurchaseContext';
 
 function ProductDetail({ params }) {
   const { id } = params;
@@ -42,13 +43,14 @@ function ProductDetail({ params }) {
     selectedColor,
     selectedSize,
     setCurrentPage,
-    setIsCartOpen,
     setIsMenuOpen,
     setIsWishlisted,
     setQuantity,
     setSelectedColor,
     setSelectedSize,
   } = useMainContext();
+
+  const { addToCart, setIsCartOpen } = usePurchase();
 
   const currentColorName = product.colors[selectedColor]?.name;
   const carouselImages = product.images[currentColorName] || [];
@@ -215,9 +217,25 @@ function ProductDetail({ params }) {
 
         {/* Action Buttons */}
         <div className="mb-8 flex flex-col gap-3 sm:flex-row">
-          <button className="flex-1 cursor-pointer rounded-lg bg-white px-4 py-3 text-sm font-semibold text-gray-900 transition hover:bg-gray-300 md:text-base">
+          <button
+            onClick={() => {
+              addToCart({
+                id: product.id,
+                name: product.name,
+                description: product.description,
+                price: product.price,
+                quantity: quantity,
+                image: product.images[currentColorName][0],
+                selectedSize: selectedSize,
+                selectedColor: product.colors[selectedColor].value,
+              });
+              setIsCartOpen(true);
+            }}
+            className="flex-1 cursor-pointer rounded-lg bg-white px-4 py-3 text-sm font-semibold text-gray-900 transition hover:bg-gray-300 md:text-base"
+          >
             Add to Cart
           </button>
+
           <button
             onClick={() => setIsWishlisted(!isWishlisted)}
             className={`cursor-pointer rounded-lg border p-3 transition ${

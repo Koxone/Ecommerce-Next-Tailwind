@@ -15,6 +15,7 @@ import { useMainContext } from '@/context/MainContext';
 import MobileMenu from '../nav/MobileMenu';
 import LogoButton from '../buttons/LogoButton';
 import { useRouter } from 'next/navigation';
+import { usePurchase } from '@/context/PurchaseContext';
 
 const Header = () => {
   const {
@@ -24,7 +25,6 @@ const Header = () => {
     isMenuOpen,
     setIsMenuOpen,
     isCartOpen,
-    setIsCartOpen,
     isRevealed,
     setIsRevealed,
     headerButtons,
@@ -83,6 +83,8 @@ const Header = () => {
     }
   };
 
+  const { addToCart, setIsCartOpen } = usePurchase();
+
   return (
     <>
       {/* Top Banner */}
@@ -131,7 +133,7 @@ const Header = () => {
               </span>
             </button>
             <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={() => setIsCartOpen(!isCartOpen)}
               className="p-2 text-gray-300 hover:text-white lg:hidden"
             >
               {isMenuOpen ? <CloseIcon size={20} /> : <MenuIcon size={20} />}

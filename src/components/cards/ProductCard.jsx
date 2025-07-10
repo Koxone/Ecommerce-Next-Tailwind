@@ -33,7 +33,10 @@ const ProductCard = ({
     const newIsWishlisted = !isWishlisted;
     setIsWishlisted(newIsWishlisted);
     if (typeof window !== 'undefined') {
-      localStorage.setItem(`wishlist-${product.id}`, newIsWishlisted.toString());
+      localStorage.setItem(
+        `wishlist-${product.id}`,
+        newIsWishlisted.toString()
+      );
     }
   };
 

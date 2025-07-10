@@ -6,25 +6,27 @@ import { createContext, useContext, useState, useEffect } from 'react';
 const PurchaseContext = createContext();
 
 export function PurchaseProvider({ children }) {
-  // Restaurar carrito desde localStorage al iniciar
-  const [cartItems, setCartItems] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem('cartItems');
-      return stored ? JSON.parse(stored) : [];
-    }
-    return [];
-  });
-
+  const [cartItems, setCartItems] = useState([]); // initialize empty, no localStorage on SSR
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  // Sincronizar carrito con localStorage en cada cambio
+  // ✅ Hydrate cart from localStorage safely on client after mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('cartItems');
+      if (stored) {
+        setCartItems(JSON.parse(stored));
+      }
+    }
+  }, []);
+
+  // ✅ Sync cart to localStorage on every change
   useEffect(() => {
     if (typeof window !== 'undefined') {
       localStorage.setItem('cartItems', JSON.stringify(cartItems));
     }
   }, [cartItems]);
 
-  // Add product to cart
+  // ✅ Add product to cart
   const addToCart = (product) => {
     setCartItems((prev) => {
       const existingItem = prev.find(
@@ -44,12 +46,10 @@ export function PurchaseProvider({ children }) {
         return [...prev, product];
       }
     });
-
-    // Abrir el carrito automáticamente al agregar un producto
-    setIsCartOpen(true);
+    setIsCartOpen(true); // auto-open cart on add
   };
 
-  // Update quantity
+  // ✅ Update quantity
   const updateQuantity = (id, selectedSize, selectedColor, newQuantity) => {
     if (newQuantity <= 0) {
       removeItem(id, selectedSize, selectedColor);
@@ -66,7 +66,7 @@ export function PurchaseProvider({ children }) {
     }
   };
 
-  // Remove item from cart
+  // ✅ Remove item from cart
   const removeItem = (id, selectedSize, selectedColor) => {
     setCartItems((prev) =>
       prev.filter(
@@ -80,10 +80,10 @@ export function PurchaseProvider({ children }) {
     );
   };
 
-  // Clear entire cart
+  // ✅ Clear cart
   const clearCart = () => setCartItems([]);
 
-  // Toggle cart open/close
+  // ✅ Toggle cart open/close
   const toggleCart = () => setIsCartOpen((prev) => !prev);
 
   return (

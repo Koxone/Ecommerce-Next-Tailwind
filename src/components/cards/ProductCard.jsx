@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { HeartIcon, StarIcon } from '../Icons';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
@@ -15,16 +15,26 @@ const ProductCard = ({
   const [localColorIndex, setLocalColorIndex] = useState(0);
   const router = useRouter();
 
-  // Wishlist Handler
-  const [isWishlisted, setIsWishlisted] = useState(() => {
-    const savedWishlist = localStorage.getItem(`wishlist-${product.id}`);
-    return savedWishlist === 'true';
-  });
+  // Wishlist State: SSR-safe initialization
+  const [isWishlisted, setIsWishlisted] = useState(false);
+
+  // Load wishlist state from localStorage on client only
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedWishlist = localStorage.getItem(`wishlist-${product.id}`);
+      if (savedWishlist === 'true') {
+        setIsWishlisted(true);
+      }
+    }
+  }, [product.id]);
+
   const handleWishlistToggle = (e) => {
     e.stopPropagation();
     const newIsWishlisted = !isWishlisted;
     setIsWishlisted(newIsWishlisted);
-    localStorage.setItem(`wishlist-${product.id}`, newIsWishlisted.toString());
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(`wishlist-${product.id}`, newIsWishlisted.toString());
+    }
   };
 
   const handleColorSelect = (index) => {

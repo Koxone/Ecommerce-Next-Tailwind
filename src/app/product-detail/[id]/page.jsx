@@ -15,8 +15,8 @@ import ExpandableText from '@/components/text/ExpandableText';
 import PromoSectionContainer from '@/components/containers/PromoSectionContainer';
 import { usePurchase } from '@/context/PurchaseContext';
 
-function ProductDetail({ params }) {
-  const { id } = params;
+async function ProductDetail({ params }) {
+  const { id } = await params;
   const product = productsData.find((p) => p.id === Number(id));
 
   if (!product) {

@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
         <PurchaseProvider>
           <html
             lang="es"
-            className={`${montserrat.variable} ${inter.variable}`}
+            className={`${montserrat.variable} ${inter.variable} overflow-x-hidden`}
           >
             <body>
               <I18nProvider>

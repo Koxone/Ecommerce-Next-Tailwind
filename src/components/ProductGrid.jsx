@@ -7,14 +7,7 @@ import productsData from '@/data/products/productsData';
 import { usePathname, useRouter } from 'next/navigation';
 import ProductFilters from '@/components/filters/ProductFilters';
 
-const ProductGrid = ({
-  title = 'SHOP DROP 1',
-  products = [],
-  showTabs = true,
-  showFilters = true,
-  showViewToggle = true,
-  className = '',
-}) => {
+const ProductGrid = ({ title = 'SHOP DROP 1', showTabs = true }) => {
   const [viewMode, setViewMode] = useState('grid');
   const pathname = usePathname();
   const router = useRouter();
@@ -25,8 +18,8 @@ const ProductGrid = ({
 
   const { activeTab, setActiveTab, sortBy, setSortBy } = useMainContext();
 
-  const defaultProducts = productsData;
-  const displayProducts = products.length > 0 ? products : defaultProducts;
+  const displayProducts = productsData; 
+
   const filteredProducts = showTabs
     ? activeTab === 'all'
       ? displayProducts

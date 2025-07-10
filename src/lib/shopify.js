@@ -1,5 +1,6 @@
 const SHOPIFY_DOMAIN = process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN;
-const SHOPIFY_STOREFRONT_ACCESS_TOKEN = process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN;
+const SHOPIFY_STOREFRONT_ACCESS_TOKEN =
+  process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN;
 
 export async function fetchShopify(query, variables = {}) {
   const response = await fetch(
@@ -82,14 +83,53 @@ export async function getProductByHandle(handle) {
             }
           }
         }
-        variants(first: 1) {
+       variants(first: 10) {
+  edges {
+    node {
+      id
+      title
+      image {
+        url
+        altText
+      }
+      price {
+        amount
+        currencyCode
+      }
+      selectedOptions {
+        name
+        value
+      }
+    }
+  }
+}
+
+      }
+    }
+  `;
+
+  const data = await fetchShopify(query, { handle });
+  return data.productByHandle;
+}
+
+export async function debugProductByHandle(handle) {
+  const query = `
+    query ProductByHandle($handle: String!) {
+      productByHandle(handle: $handle) {
+        id
+        title
+        variants(first: 10) {
           edges {
             node {
               id
               title
-              price {
-                amount
-                currencyCode
+              image {
+                url
+                altText
+              }
+              selectedOptions {
+                name
+                value
               }
             }
           }
@@ -99,5 +139,6 @@ export async function getProductByHandle(handle) {
   `;
 
   const data = await fetchShopify(query, { handle });
+  console.log(JSON.stringify(data.productByHandle, null, 2));
   return data.productByHandle;
 }
